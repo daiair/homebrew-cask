@@ -1,4 +1,4 @@
-class GoogleChrome < Cask
+class GoogleChromeBeta < Cask
   url 'https://dl.google.com/chrome/mac/beta/GoogleChrome.dmg'
   homepage 'https://www.google.com/chrome/'
   version 'latest'
