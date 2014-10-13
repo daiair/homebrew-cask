@@ -1,7 +1,12 @@
 class Multibit < Cask
-  url 'https://multibit.org/releases/multibit-0.5.17/multibit-0.5.17.dmg'
+  version '0.5.18'
+  sha256 '0d2fe6fa68385c1ca964d9588272787dabffbc2061f29ebaab422317d0972257'
+
+  url "https://multibit.org/releases/multibit-#{version}/multibit-#{version}.dmg"
+  gpg "#{url}.asc",
+      :key_id => '23f7fb7b'
   homepage 'https://multibit.org/'
-  version '0.5.17'
-  sha256 '1facdaacaec20c24777c26e05f2655a727c7ea92f0cfe84bb1fbdfcb65ae893c'
-  link 'MultiBit.app'
+  license :unknown
+
+  app 'MultiBit.app'
 end

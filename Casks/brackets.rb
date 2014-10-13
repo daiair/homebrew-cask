@@ -1,7 +1,14 @@
 class Brackets < Cask
-  url 'https://github.com/adobe/brackets/releases/download/sprint-38/Brackets.Sprint.38.dmg'
+  version '0.44'
+  sha256 '3619f01dddc55f47be87306909b7264cbdad9fb43be8c88661bec0a087b0f8a6'
+
+  url "https://github.com/adobe/brackets/releases/download/release-#{version}/Brackets.Release.#{version}.dmg"
   homepage 'http://brackets.io'
-  version '0.38.0'
-  sha256 'afac1657a822cbee928633080a844e9a127144d5e834b710a83d04273e818cc1'
-  link 'Brackets.app'
+  license :mit
+
+  app 'Brackets.app'
+  zap :delete => [
+                  '~/Library/Application Support/Brackets',
+                  '~/Library/Preferences/io.brackets.appshell.plist',
+                 ]
 end

@@ -1,7 +1,11 @@
 class Amethyst < Cask
-  url 'http://ianyh.com/amethyst/versions/Amethyst-0.8.5.zip'
+  version '0.9.3'
+  sha256 'e9820972bfc7e15e4dec6b96217f2e29014de9c23b2af063cc3af627f07263d2'
+
+  url "http://ianyh.com/amethyst/versions/Amethyst-#{version}.zip"
+  appcast 'http://ianyh.github.io/Amethyst/appcast.xml'
   homepage 'http://ianyh.com/amethyst'
-  version '0.8.5'
-  sha256 'f4798450250b0995800af2e24e62ecb8e0696df0e3bd8458c5cfa32ec8e6c781'
-  link 'Amethyst.app'
+  license :oss
+
+  app 'Amethyst.app'
 end

@@ -1,7 +1,10 @@
 class Liteide < Cask
-  url 'https://golangide.googlecode.com/files/liteidex20.1.macosx.zip'
-  homepage 'https://code.google.com/p/golangide/'
-  version 'x20.1'
-  sha256 'e969ffb4930e63154c760184a7985e2d263b5d8a3c353315030431ceed94b216'
-  link 'liteide/LiteIDE.app'
+  version '23.2'
+  sha256 '29cf71bfb324e5d648038fd3e5b4ddc9335b8ca6393281d14c40067e9cb01b8b'
+
+  url "https://downloads.sourceforge.net/project/liteide/X#{version}/liteidex#{version}-1.macosx.zip"
+  homepage 'https://github.com/visualfc/liteide'
+  license :oss
+
+  app 'LiteIDE.app'
 end

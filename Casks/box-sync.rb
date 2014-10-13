@@ -1,7 +1,10 @@
 class BoxSync < Cask
-  url 'http://box.com/sync4mac'
+  version :latest
+  sha256 :no_check
+
+  url 'https://box.com/sync4mac'
   homepage 'https://sites.box.com/sync4/'
-  version 'latest'
-  no_checksum
-  link 'Box Sync.app'
+  license :unknown
+
+  app 'Box Sync.app'
 end

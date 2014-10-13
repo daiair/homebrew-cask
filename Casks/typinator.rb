@@ -1,7 +1,13 @@
 class Typinator < Cask
-  url 'http://www.ergonis.com/downloads/typinator-install.dmg'
+  version '6.2'
+  sha256 '4b9b3acc26716dbf01951043f0102489ffd32436cdad6820e382dbb5b1fa0eb6'
+
+  url "http://www.ergonis.com/downloads/products/typinator/Typinator#{version.gsub('.', '')}-Install.dmg"
   homepage 'http://www.ergonis.com/'
-  version 'latest'
-  no_checksum
-  link 'Typinator.app'
+  license :unknown
+
+  app 'Typinator.app'
+  caveats do
+    assistive_devices
+  end
 end

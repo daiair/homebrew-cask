@@ -1,7 +1,10 @@
 class AmadeusPro < Cask
-  url 'http://s3.amazonaws.com/AmadeusPro2/AmadeusPro.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://s3.amazonaws.com/AmadeusPro2/AmadeusPro.dmg'
   homepage 'http://www.hairersoft.com/pro.html'
-  version 'latest'
-  no_checksum
-  link 'Amadeus Pro.app'
+  license :unknown
+
+  app 'Amadeus Pro.app'
 end

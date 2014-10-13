@@ -1,7 +1,11 @@
 class Contexts < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://contextsformac.com/releases/Contexts.zip'
+  appcast 'http://www.contextsformac.com/releases/appcast.xml'
   homepage 'http://contextsformac.com/'
-  version 'latest'
-  no_checksum
-  link 'Contexts.app'
+  license :unknown
+
+  app 'Contexts.app'
 end

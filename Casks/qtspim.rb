@@ -1,7 +1,10 @@
 class Qtspim < Cask
-  url 'http://sourceforge.net/projects/spimsimulator/files/latest/download'
+  version :latest
+  sha256 :no_check
+
+  url 'https://sourceforge.net/projects/spimsimulator/files/latest/download'
   homepage 'http://spimsimulator.sourceforge.net/'
-  version 'latest'
-  no_checksum
-  link 'QtSpim.app'
+  license :oss
+
+  app 'QtSpim.app'
 end

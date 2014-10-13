@@ -1,7 +1,11 @@
 class Irip < Cask
+  sha256 :no_check
+  version :latest
+
   url 'http://files.thelittleappfactory.com/iRip2/iRip.zip'
-  version 'latest'
+  appcast 'https://files.thelittleappfactory.com/iRip2/appcast.xml'
   homepage 'http://thelittleappfactory.com/irip/'
-  no_checksum
-  link 'iRip.app'
+  license :unknown
+
+  app 'iRip.app'
 end

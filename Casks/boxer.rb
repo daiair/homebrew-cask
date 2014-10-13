@@ -1,7 +1,11 @@
 class Boxer < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://boxerapp.com/download/latest'
+  appcast 'http://boxerapp.com/appcast'
   homepage 'http://boxerapp.com/'
-  version 'latest'
-  no_checksum
-  link 'Boxer.app'
+  license :unknown
+
+  app 'Boxer.app'
 end

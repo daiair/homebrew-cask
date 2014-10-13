@@ -1,7 +1,10 @@
 class Sonos < Cask
-  url 'http://update.sonos.com/software/mac/mdcr/SonosDesktopController43.dmg'
+  version '5.1'
+  sha256 '8a54102eb13879bd361624fa013279aecd27888b9575e19d60985dd029635d8a'
+
+  url 'http://update.sonos.com/software/mac/mdcr/SonosDesktopController51.dmg'
   homepage 'http://www.sonos.com/'
-  version '4.3'
-  sha256 '4e8027da6efa047fefd39b234f9917503b0bd994093775da6f08ce9cf6faef4a'
-  link 'Sonos.app'
+  license :unknown
+
+  app 'Sonos.app'
 end

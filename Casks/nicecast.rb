@@ -1,7 +1,10 @@
 class Nicecast < Cask
-  url 'http://rogueamoeba.com/nicecast/download/Nicecast.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'https://rogueamoeba.com/nicecast/download/Nicecast.zip'
   homepage 'http://rogueamoeba.com/nicecast'
-  version 'latest'
-  no_checksum
-  link 'Nicecast.app'
+  license :unknown
+
+  app 'Nicecast.app'
 end

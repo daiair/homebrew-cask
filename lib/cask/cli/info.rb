@@ -1,5 +1,6 @@
-class Cask::CLI::Info
-  def self.run(*cask_names)
+class Cask::CLI::Info < Cask::CLI::Base
+  def self.run(*args)
+    cask_names = cask_names_from(args)
     raise CaskUnspecifiedError if cask_names.empty?
     cask_names.each do |cask_name|
       odebug "Getting info for Cask #{cask_name}"
@@ -10,7 +11,7 @@ class Cask::CLI::Info
   end
 
   def self.help
-    "displays information about the cask of the given name"
+    "displays information about the Cask of the given name"
   end
 
   def self.info(cask)
@@ -22,19 +23,31 @@ class Cask::CLI::Info
 
     <<-PURPOSE
 #{cask}: #{cask.version}
-#{cask.homepage}
+#{cask.homepage or 'No Homepage'}
 #{installation}
-#{github_info(cask)}
-#{artifact_info(cask)}
+#{github_info(cask) or 'No GitHub URL'}
+#{artifact_info(cask) or 'No Artifact Info'}
 PURPOSE
   end
 
   def self.github_info(cask)
-    tap = cask.title
-    tap = cask.class.all_titles.grep(/#{tap}$/).first unless tap =~ /\//
-    tap, name = tap.split "/"
-    user, repo = tap.split "-"
-    "https://github.com/#{user}/homebrew-#{repo}/commits/master/Casks/#{name}.rb"
+    title = cask.title
+    title = cask.class.all_titles.detect { |t| t.split("/").last == title } unless title =~ /\//
+    return nil unless title.respond_to?(:length) and title.length > 0
+    path_elements = title.split '/'
+    if path_elements.count == 2
+      # eg caskroom-cask/google-chrome.
+      # Not certain this form is needed, but it was supported in the past.
+      name = path_elements[1]
+      dash_elements = path_elements[0].split('-')
+      repo = dash_elements.pop
+      dash_elements.pop if dash_elements.count > 1 and dash_elements[-1] + '-' == repo_prefix
+      user = dash_elements.join('-')
+    else
+      user, repo, name = path_elements
+    end
+    repo.sub!(/^homebrew-/i, '')
+    "https://github.com/#{user}/homebrew-#{repo}/blob/master/Casks/#{name}.rb"
   end
 
   def self.artifact_info(cask)

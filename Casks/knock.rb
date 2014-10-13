@@ -1,7 +1,10 @@
 class Knock < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://knocktounlock.com/download'
   homepage 'http://knocktounlock.com'
-  version 'latest'
-  no_checksum
-  link 'Knock.app'
+  license :unknown
+
+  app 'Knock.app'
 end

@@ -1,7 +1,11 @@
 class Textexpander < Cask
-  url 'http://cdn.smilesoftware.com/TextExpander_4.2.1.zip'
+  version '4.3.3'
+  sha256 '1aa42fa3b1bcb6e41f662c040f3efde5713ddfe8f1aee9d03c8f60bcd9d65ddf'
+
+  url "http://cdn.smilesoftware.com/TextExpander_#{version}.zip"
+  appcast 'http://updates.smilesoftware.com/com.smileonmymac.textexpander.xml'
   homepage 'http://www.smilesoftware.com/TextExpander/index.html'
-  version '4.2.1'
-  sha256 'd0082d2d6ffd1da991364db6de388b361e200ea89765dfbcf1b5e7b0636a593d'
-  link 'TextExpander.app'
+  license :unknown
+
+  app 'TextExpander.app'
 end

@@ -1,7 +1,15 @@
 class Firefox < Cask
+  version :latest
+  sha256 :no_check
+
   url 'https://download.mozilla.org/?product=firefox-latest&os=osx&lang=en-US'
   homepage 'https://www.mozilla.org/en-US/firefox/'
-  version 'latest'
-  no_checksum
-  link 'Firefox.app'
+  license :oss
+
+  app 'Firefox.app'
+
+  zap :delete => [
+                  '~/Library/Application Support/Firefox',
+                  '~/Library/Caches/Firefox',
+                 ]
 end

@@ -1,7 +1,10 @@
 class Supersync < Cask
-  url 'http://supersync.com/downloads/SuperSync.app.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'https://supersync.com/downloads/SuperSync.app.zip'
   homepage 'http://supersync.com/'
-  version 'latest'
-  no_checksum
-  link 'SuperSync.app'
+  license :unknown
+
+  app 'SuperSync.app'
 end

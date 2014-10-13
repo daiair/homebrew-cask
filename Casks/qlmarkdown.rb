@@ -1,7 +1,18 @@
 class Qlmarkdown < Cask
-  url 'https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip'
+  version '1.3.3'
+  sha256 '045712562665673924397bbbef1ee1157b44e23c9744feda6feda27e107802d3'
+
+  url "https://github.com/toland/qlmarkdown/releases/download/v#{version}/QLMarkdown.qlgenerator.zip"
   homepage 'https://github.com/toland/qlmarkdown'
-  version '1.3'
-  sha256 '8fd344ec0db6ff084cc198ccef51e82da95bfee37cbbd1a7ae1fea937273de03'
-  qlplugin 'QLMarkdown/QLMarkdown.qlgenerator'
+  license :oss
+
+  # Fix broken zip file with no toplevel bundle directory.  This was
+  # not needed for version 1.3.2.  We could add an option to the main
+  # DSL to identify such containers and generate a target directory.
+  container :type => :naked
+  preflight do
+    system '/usr/bin/ditto', '-xk', '--', "#{destination_path}/QLMarkdown.qlgenerator.zip", "#{destination_path}/QLMarkdown.qlgenerator"
+  end
+
+  qlplugin 'QLMarkdown.qlgenerator'
 end

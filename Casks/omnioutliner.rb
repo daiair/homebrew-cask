@@ -1,7 +1,10 @@
 class Omnioutliner < Cask
-  url 'http://www.omnigroup.com/download/latest/omnioutliner'
+  version :latest
+  sha256 :no_check
+
+  url 'https://www.omnigroup.com/download/latest/omnioutliner'
   homepage 'http://www.omnigroup.com/omnioutliner/'
-  version 'latest'
-  no_checksum
-  link 'OmniOutliner.app'
+  license :unknown
+
+  app 'OmniOutliner.app'
 end

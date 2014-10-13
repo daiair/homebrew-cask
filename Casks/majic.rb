@@ -1,7 +1,11 @@
 class Majic < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://erikhinterbichler.com/blog/wp-content/uploads/software/Majic.zip'
+  appcast 'http://erikhinterbichler.com/blog/wp-content/uploads/updates/majic-update.xml'
   homepage 'http://erikhinterbichler.com/apps/majic/'
-  version 'latest'
-  no_checksum
-  link 'Majic.app'
+  license :unknown
+
+  app 'Majic.app'
 end

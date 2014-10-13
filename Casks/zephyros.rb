@@ -1,7 +1,11 @@
 class Zephyros < Cask
+  version :latest
+  sha256 :no_check
+
   url 'https://raw.github.com/sdegutis/zephyros/master/Builds/Zephyros-LATEST.app.tar.gz'
+  appcast 'https://raw.github.com/sdegutis/zephyros/master/appcast.xml'
   homepage 'https://github.com/sdegutis/zephyros'
-  version 'latest'
-  no_checksum
-  link 'Zephyros.app'
+  license :oss
+
+  app 'Zephyros.app'
 end

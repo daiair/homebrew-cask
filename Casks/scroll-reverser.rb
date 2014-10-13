@@ -1,7 +1,11 @@
 class ScrollReverser < Cask
-  url 'https://d20vhy8jiniubf.cloudfront.net/downloads/ScrollReverser-1.6.zip'
+  version '1.6.1'
+  sha256 'babce7e360ec76a797ac8843e20d5b75a0475807c487df87c01bc29cd8050584'
+
+  url "https://d20vhy8jiniubf.cloudfront.net/downloads/ScrollReverser-#{version}.zip"
+  appcast 'http://softwareupdate.pilotmoon.com/update/scrollreverser/appcast.xml'
   homepage 'https://pilotmoon.com/scrollreverser/'
-  version '1.6'
-  sha256 'ea928cdb59b773e97a7509b752365959556d23c7c294716f2992199ce5ecff9a'
-  link 'Scroll Reverser.app'
+  license :unknown
+
+  app 'Scroll Reverser.app'
 end

@@ -1,7 +1,10 @@
 class Xbmc < Cask
-  url 'http://mirrors.xbmc.org/releases/osx/xbmc-12.3-x86_64.dmg'
+  version '13.2'
+  sha256 '5f76f75971aa27cc74dfeaca3633d5e079ab7731deabb0f8be909e5e871a9223'
+
+  url "http://mirrors.xbmc.org/releases/osx/x86_64/xbmc-#{version}-Gotham-x86_64.dmg"
   homepage 'http://xbmc.org/'
-  version '12.3'
-  sha256 'ff592da6e455cf06dddf90a765ab784b688285653bfdc2b5ab7820c9ee7ee366'
-  link 'XBMC.app'
+  license :oss
+
+  app 'XBMC.app'
 end

@@ -1,7 +1,11 @@
 class Pins < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://pinsapp.com/download/Pins.dmg'
+  appcast 'http://pinsapp.com/appcast.xml'
   homepage 'http://pinsapp.com/'
-  version 'latest'
-  no_checksum
-  link 'Pins.app'
+  license :unknown
+
+  app 'Pins.app'
 end

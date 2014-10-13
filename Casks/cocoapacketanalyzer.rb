@@ -1,7 +1,11 @@
 class Cocoapacketanalyzer < Cask
-  url 'http://tastycocoabytes.com/_downloads/CPA_121.dmg'
+  version '1.31'
+  sha256 'fc3586868fcf90e3ca766c31dbf184de78e5c907210dfdabbd13a831712fc864'
+
+  url 'http://tastycocoabytes.com/_downloads/CPA_131.dmg'
+  appcast 'http://www.tastycocoabytes.com/cpa/updates/appcasting.php'
   homepage 'http://www.tastycocoabytes.com/cpa/'
-  version '1.21'
-  sha256 '70bc100cb37a5fc783e1a435f20602b4bbce7b6c1b6e95eb88256f51998c9c5a'
-  link 'CocoaPacketAnalyzer.app'
+  license :unknown
+
+  app 'CocoaPacketAnalyzer.app'
 end

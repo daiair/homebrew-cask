@@ -1,7 +1,11 @@
 class BlackInk < Cask
-  url 'http://www.red-sweater.com/blackink/BlackInk1.5.3.zip'
+  version '1.6.1'
+  sha256 'efef4a810b5708478341e92f911aadc4e8f75b285a0bd7b37087d5252d0f6175'
+
+  url "http://www.red-sweater.com/blackink/BlackInk#{version}.zip"
+  appcast 'http://www.red-sweater.com/blackink/appcast1.php'
   homepage 'http://www.red-sweater.com/blackink/'
-  version '1.5.3'
-  sha256 '0ab1c8669d353dff8c39aea57c23f6ae50aae622b39b9e57cfebfe654cc3ff07'
-  link 'Black Ink.app'
+  license :unknown
+
+  app 'Black Ink.app'
 end

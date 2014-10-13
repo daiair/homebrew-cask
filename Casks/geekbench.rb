@@ -1,7 +1,11 @@
 class Geekbench < Cask
-  url 'http://geekbench.s3.amazonaws.com/Geekbench-3.1.5-Mac.zip'
+  version '3.2.2'
+  sha256 'c4891501fe720981e1baca7311241bbd036b82b8d540bc5ad1016465ee40ebe1'
+
+  url "https://d34wv75roto0rl.cloudfront.net/Geekbench-#{version}-Mac.zip"
+  appcast 'http://www.primatelabs.com/appcast/geekbench3.xml'
   homepage 'http://www.primatelabs.com/geekbench/'
-  version '3.1.5'
-  sha256 '720eb6afbed35a21e218df50e02fbda098f1d52c7627b2f22347c525e1d3cef7'
-  link 'Geekbench 3.app'
+  license :unknown
+
+  app 'Geekbench 3.app'
 end

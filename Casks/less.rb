@@ -1,7 +1,10 @@
 class Less < Cask
-  url 'http://incident57.com/less/files/Less.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'https://incident57.com/less/files/Less.zip'
   homepage 'http://incident57.com/less/'
-  version 'latest'
-  no_checksum
-  link 'Less.app'
+  license :unknown
+
+  app 'Less.app'
 end

@@ -1,8 +1,12 @@
 class Virtualbox < Cask
-  url 'http://download.virtualbox.org/virtualbox/4.3.10/VirtualBox-4.3.10-93012-OSX.dmg'
+  version '4.3.18-96516'
+  sha256 'a0c6a9a9455397a929150065b2883714a1dd630f63ef88b8d8cf527944becfc6'
+
+  url "http://download.virtualbox.org/virtualbox/#{version.gsub(/-.*/, '')}/VirtualBox-#{version}-OSX.dmg"
   homepage 'http://www.virtualbox.org'
-  version '4.3.10-93012'
-  sha256 '8bf24a7afbde0cdb560b40abd8ab69584621ca6de59026553f007a0da7b4d443'
-  install 'VirtualBox.pkg'
-  uninstall :script => { :executable => 'VirtualBox_Uninstall.tool', :args => %w[--unattended] }
+  license :unknown
+
+  pkg 'VirtualBox.pkg'
+  uninstall :script => { :executable => 'VirtualBox_Uninstall.tool', :args => %w[--unattended] },
+            :pkgutil => 'org.virtualbox.pkg.*'
 end

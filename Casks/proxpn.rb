@@ -1,7 +1,11 @@
 class Proxpn < Cask
-  url 'http://proxpn.com/mac.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://proxpn.com/mac.dmg'
+  appcast 'http://www.proxpn.org/updater/appcast.rss'
   homepage 'http://proxpn.com'
-  version 'latest'
-  no_checksum
-  link 'ProXPN.app'
+  license :unknown
+
+  app 'ProXPN.app'
 end

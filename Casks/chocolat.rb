@@ -1,7 +1,11 @@
 class Chocolat < Cask
-  url 'http://chocolatapp.com/download'
+  version :latest
+  sha256 :no_check
+
+  url 'https://chocolatapp.com/download'
+  appcast 'http://chocolatapp.com/userspace/appcast/appcast_alpha.php'
   homepage 'http://chocolatapp.com/'
-  version 'latest'
-  no_checksum
-  link 'Chocolat.app'
+  license :unknown
+
+  app 'Chocolat.app'
 end

@@ -1,7 +1,10 @@
 class Pharo < Cask
-  url 'http://files.pharo.org/platform/Pharo2.0-mac.zip'
+  version '3.0'
+  sha256 'f811c7ab77240c680ac74f0d50390101cd61007f027045a9c68322f7dadc6c38'
+
+  url "http://files.pharo.org/platform/Pharo#{version}-mac.zip"
   homepage 'http://www.pharo-project.org/home'
-  version '2.0'
-  sha256 '3817ce1f949fd07b667a2ff5e8538d32dedbeec5c1c898f35d0a0597ab4c73ab'
-  link 'Pharo2.0.app'
+  license :unknown
+
+  app "Pharo#{version}.app"
 end

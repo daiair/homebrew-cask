@@ -1,12 +1,17 @@
 class Bartender < Cask
-  url 'http://www.macbartender.com/Demo/Bartender.zip'
-  homepage 'http://www.macbartender.com/'
-  version 'latest'
-  no_checksum
-  link 'Bartender.app'
+  version :latest
+  sha256 :no_check
 
-  after_install do
+  url 'http://www.macbartender.com/Demo/Bartender.zip'
+  appcast 'http://www.macbartender.com/updates/updates.php'
+  homepage 'http://www.macbartender.com/'
+  license :unknown
+
+  app 'Bartender.app'
+
+  postflight do
     # Don't ask to move the app bundle to /Applications
     system '/usr/bin/defaults', 'write', 'com.surteesstudios.Bartender', 'moveToApplicationsFolderAlertSuppress', '-bool', 'true'
   end
+  zap :delete => '~/Library/Preferences/com.surteesstudios.Bartender.plist'
 end

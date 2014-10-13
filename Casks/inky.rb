@@ -1,8 +1,15 @@
 class Inky < Cask
-  url 'http://inky.com/mail/InkyInstall.pkg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://inky.com/mail/InkyInstall.dmg'
   homepage 'http://inky.com'
-  version 'latest'
-  no_checksum
-  install 'InkyInstall.pkg'
-  uninstall :pkgutil => 'com.arcode.inky.*pkg'
+  license :unknown
+
+  app 'Inky.app'
+
+  zap :delete => [
+                  '~/Library/Application Support/Arcode',
+                  '~/Library/Caches/com.arcode.inky',
+                 ]
 end

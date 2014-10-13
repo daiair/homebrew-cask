@@ -1,7 +1,11 @@
 class Things < Cask
-  url 'http://culturedcode.com/things/download/'
+  version :latest
+  sha256 :no_check
+
+  url 'https://culturedcode.com/things/download/'
+  appcast 'http://downloads.culturedcode.com/things/download/Things_Updates.php'
   homepage 'http://culturedcode.com/things/'
-  version 'latest'
-  no_checksum
-  link 'Things.app'
+  license :unknown
+
+  app 'Things.app'
 end

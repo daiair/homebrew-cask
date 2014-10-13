@@ -1,7 +1,10 @@
 class Filedrop < Cask
-  url 'http://commondatastorage.googleapis.com/filedropme/Filedrop.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://commondatastorage.googleapis.com/filedropme/Filedrop.dmg'
   homepage 'http://www.filedropme.com/'
-  version 'latest'
-  no_checksum
-  link 'Filedrop.app'
+  license :unknown
+
+  app 'Filedrop.app'
 end

@@ -1,7 +1,10 @@
 class Acorn < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://flyingmeat.com/download/Acorn.zip'
   homepage 'http://flyingmeat.com/acorn/'
-  version 'latest'
-  no_checksum
-  link 'Acorn.app'
+  license :unknown
+
+  app 'Acorn.app'
 end

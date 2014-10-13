@@ -1,7 +1,10 @@
 class DumpTruck < Cask
-  url 'http://www.goldenfrog.com/downloads/dumptruck/dumptruck.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://www.goldenfrog.com/downloads/dumptruck/dumptruck.dmg'
   homepage 'http://www.goldenfrog.com/dumptruck'
-  version 'latest'
-  no_checksum
-  link 'Dump Truck.app'
+  license :unknown
+
+  app 'Dump Truck.app'
 end

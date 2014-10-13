@@ -1,7 +1,11 @@
 class KextWizard < Cask
-  url 'https://dl.dropboxusercontent.com/u/7085278/Kext_Wizard/KextWizard.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'http://wizards.osxlatitude.com/kext/kw.zip'
+  appcast 'http://wizards.osxlatitude.com/kext/update.xml'
   homepage 'http://www.insanelymac.com/forum/topic/253395-kext-wizard-easy-to-use-kext-installer-and-more/'
-  version 'latest'
-  no_checksum
-  link 'Kext Wizard.app'
+  license :unknown
+
+  app 'Kext Wizard.app'
 end

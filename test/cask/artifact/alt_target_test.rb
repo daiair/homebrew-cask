@@ -12,7 +12,7 @@ describe Cask::Artifact::App do
       cask = local_alt_caffeine
 
       shutup do
-        Cask::Artifact::App.new(cask).install
+        Cask::Artifact::App.new(cask).install_phase
       end
 
       TestHelper.valid_alias?(Cask.appdir/'AnotherName.app').must_equal true
@@ -22,24 +22,24 @@ describe Cask::Artifact::App do
       cask = local_alt_caffeine
 
       shutup do
-        Cask::Artifact::App.new(cask).install
+        Cask::Artifact::App.new(cask).install_phase
       end
 
       Cask::SystemCommand.run('/usr/bin/xattr',
                               :args => ['-p',
                                         'com.apple.metadata:kMDItemAlternateNames',
                                         Cask.appdir/'AnotherName.app'],
-                              :stderr => :silence).must_match(/AnotherName/)
+                              :print_stderr => false).stdout.must_match(/AnotherName/)
     end
 
     it "works with an application in a subdir" do
       AltSubDirCask = Class.new(Cask)
       AltSubDirCask.class_eval do
-        url TestHelper.local_binary('caffeine.zip')
+        url TestHelper.local_binary_url('caffeine.zip')
         homepage 'http://example.com/local-caffeine'
         version '1.2.3'
         sha256 '9203c30951f9aab41ac294bbeb1dcef7bed401ff0b353dcb34d68af32ea51853'
-        link 'subdir/Caffeine.app', :target => 'AnotherName.app'
+        app 'subdir/Caffeine.app', :target => 'AnotherName.app'
       end
 
       begin
@@ -51,7 +51,7 @@ describe Cask::Artifact::App do
         FileUtils.mv((subdir_cask.destination_path/'Caffeine.app'), appsubdir)
 
         shutup do
-          Cask::Artifact::App.new(subdir_cask).install
+          Cask::Artifact::App.new(subdir_cask).install_phase
         end
 
         TestHelper.valid_alias?(Cask.appdir/'AnotherName.app').must_equal true
@@ -71,7 +71,7 @@ describe Cask::Artifact::App do
       FileUtils.cp_r app_path, app_path.sub('Caffeine.app', 'CaffeineAgain.app')
 
       shutup do
-        Cask::Artifact::App.new(cask).install
+        Cask::Artifact::App.new(cask).install_phase
       end
 
       TestHelper.valid_alias?(Cask.appdir/'AnotherName.app').must_equal true
@@ -84,7 +84,7 @@ describe Cask::Artifact::App do
       (Cask.appdir/'AnotherName.app').mkpath
 
       TestHelper.must_output(self, lambda {
-        Cask::Artifact::App.new(cask).install
+        Cask::Artifact::App.new(cask).install_phase
       }, "==> It seems there is already an App at '#{Cask.appdir.join('AnotherName.app')}'; not linking.")
 
       (Cask.appdir/'AnotherName.app').wont_be :symlink?
@@ -96,7 +96,7 @@ describe Cask::Artifact::App do
       (Cask.appdir/'AnotherName.app').make_symlink('/tmp')
 
       TestHelper.must_output(self, lambda {
-        Cask::Artifact::App.new(cask).install
+        Cask::Artifact::App.new(cask).install_phase
       }, "==> Symlinking App 'Caffeine.app' to '#{Cask.appdir.join('AnotherName.app')}'")
 
       File.readlink(Cask.appdir/'AnotherName.app').wont_equal '/tmp'

@@ -1,7 +1,10 @@
 class NavicatForMysql < Cask
+  version '11.0.20'
+  sha256 '05f5084d2fdece158a2b8e48d3040a1d66984c6ae06b7f43371b4183ab1a5f6d'
+
   url 'http://download.navicat.com/download/navicat110_mysql_en.dmg'
   homepage 'http://www.navicat.com/products/navicat-for-mysql'
-  version '11.0.16'
-  sha256 '84ce5ada30825cadce25ed7ac2d9a62de979a65ab9417b02f61840ed65bcc0fd'
-  link 'Navicat for MySQL.app'
+  license :unknown
+
+  app 'Navicat for MySQL.app'
 end

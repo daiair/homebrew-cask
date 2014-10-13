@@ -1,7 +1,18 @@
 class Launchbar < Cask
-  url 'http://www.obdev.at/downloads/launchbar/LaunchBar-5.6.2.dmg'
+  version '6.1.2'
+  sha256 'adbc69a93184597f5fe5b191d0b747a74d95d64cf67c20bfece4aa8917ecb098'
+
+  url "http://www.obdev.at/downloads/launchbar/LaunchBar-#{version}.dmg"
   homepage 'http://www.obdev.at/products/launchbar/'
-  version '5.6.2'
-  sha256 '9213b8f9a39eb32d5650c8df207048bc31250fc448d79f5276e4f8f661f49953'
-  link 'LaunchBar.app'
+  license :unknown
+
+  app 'LaunchBar.app'
+  zap :delete => [
+                  '~/Library/Preferences/at.obdev.LaunchBar.plist',
+                  '~/Library/Application Support/LaunchBar/Configuration.plist',
+                  '~/Library/Application Support/LaunchBar/CustomShortcuts.plist',
+                  # todo unsure if these contain user-created content
+                  # '~/Library/Application Support/LaunchBar/Actions',
+                  # '~/Library/Application Support/LaunchBar/Snippets',
+                 ]
 end

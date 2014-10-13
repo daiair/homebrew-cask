@@ -1,10 +1,20 @@
 class Sourcetree < Cask
-  url 'http://downloads.atlassian.com/software/sourcetree/SourceTree_1.8.1.dmg'
+  version '2.0.2'
+  sha256 'ddab63faf7230ca7fb5ab52b5aa31a1b31f6f658a52b687418e2d5de6b7ba561'
+
+  url "https://downloads.atlassian.com/software/sourcetree/SourceTree_#{version}.dmg"
+  appcast 'http://www.sourcetreeapp.com/update/SparkleAppcast.xml'
   homepage 'http://www.sourcetreeapp.com/'
-  version '1.8.1'
-  sha256 '37a42f2d83940cc7e1fbd573a70c3c74a44134c956ac3305f6b153935dc01b80'
-  link 'SourceTree.app'
+  license :unknown
+
+  app 'SourceTree.app'
   binary 'SourceTree.app/Contents/Resources/stree'
+
+  zap :delete => [
+                  '~/Library/Application Support/SourceTree',
+                  '~/Library/Caches/com.torusknot.SourceTreeNotMAS',
+                 ]
+
   caveats do
     files_in_usr_local
   end

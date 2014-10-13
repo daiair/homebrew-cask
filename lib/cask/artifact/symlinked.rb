@@ -22,14 +22,14 @@ class Cask::Artifact::Symlinked < Cask::Artifact::Base
     odebug "Adding #{attribute} metadata"
     altnames = @command.run('/usr/bin/xattr',
                             :args => ['-p', attribute, target],
-                            :stderr => :silence).sub(/\A\((.*)\)\Z/, "#{$1}")
+                            :print_stderr => false).stdout.sub(/\A\((.*)\)\Z/, "#{$1}")
     odebug "Existing metadata is: '#{altnames}'"
     altnames.concat(', ') if altnames.length > 0
     altnames.concat(%Q{"#{target.basename}"})
     altnames = %Q{(#{altnames})}
     @command.run!('/usr/bin/xattr',
                   :args => ['-w', attribute, altnames, target],
-                  :stderr => :silence)
+                  :print_stderr => false)
   end
 
   def summary
@@ -82,12 +82,12 @@ class Cask::Artifact::Symlinked < Cask::Artifact::Base
     end
   end
 
-  def install
+  def install_phase
     # the sort is for predictability between Ruby versions
     @cask.artifacts[self.class.artifact_dsl_key].sort.each { |artifact| link(artifact) }
   end
 
-  def uninstall
+  def uninstall_phase
     # the sort is for predictability between Ruby versions
     @cask.artifacts[self.class.artifact_dsl_key].sort.each { |artifact| unlink(artifact) }
   end

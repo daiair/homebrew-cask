@@ -1,7 +1,10 @@
 class Thunderbird < Cask
-  url 'https://download.mozilla.org/?product=thunderbird-24.4.0&os=osx&lang=en-US'
+  version '31.1.2'
+  sha256 '491fc8c061055a9e1f52961c488ea84f7f2fcf633a41a983e4c8985859db75af'
+
+  url "https://download.mozilla.org/?product=thunderbird-#{version}&os=osx&lang=en-US"
   homepage 'http://www.mozilla.org/en-US/thunderbird/'
-  version '24.4.0'
-  sha256 'af0eee8a9eab91da3520267d76a449c7945fc3d490449fcc8e6c33c996feff13'
-  link 'Thunderbird.app'
+  license :oss
+
+  app 'Thunderbird.app'
 end

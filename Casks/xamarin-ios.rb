@@ -1,8 +1,13 @@
 class XamarinIos < Cask
-  url 'http://download.xamarin.com/MonoTouch/Mac/monotouch-7.2.1.25.pkg'
+  version '8.2.0.193'
+  sha256 '6fd3ffd73937d937e0dac4bfdc6534fc948ceebf38d02b3eee94cd857fba4ee8'
+
+  url "http://download.xamarin.com/MonoTouch/Mac/monotouch-#{version}.pkg"
+  # non-Sparkle appcast
+  appcast 'http://xamarin.com/installer_assets/v3/Mac/Universal/InstallationManifest.xml'
   homepage 'http://xamarin.com/ios'
-  version '7.2.1.25'
-  sha256 'd95afc2fafd3e773809e18d39f1b830e0df172f39d3f60b0cfa55f4058eb19a2'
-  install 'monotouch-7.2.1.25.pkg'
+  license :unknown
+
+  pkg "monotouch-#{version}.pkg"
   uninstall :pkgutil => 'com.xamarin.monotouch.pkg'
 end

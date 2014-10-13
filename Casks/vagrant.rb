@@ -1,8 +1,12 @@
 class Vagrant < Cask
-  url 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.4.dmg'
+  version '1.6.5'
+  sha256 'a94a16b9ed5f63460f64110738067aea029238f8d826c8dd90c5c34615a5be1e'
+
+  url "https://dl.bintray.com/mitchellh/vagrant/vagrant_#{version}.dmg"
   homepage 'http://www.vagrantup.com'
-  version '1.5.4'
-  sha256 'c8ded45183a03a8bfabe67ee82886ecfdafeb24030df9e631717ae1209475ba8'
-  install 'Vagrant.pkg'
-  uninstall :script => { :executable => 'uninstall.tool', :input => %w[Yes] }
+  license :unknown
+
+  pkg 'Vagrant.pkg'
+  uninstall :script => { :executable => 'uninstall.tool', :input => %w[Yes] },
+            :pkgutil => 'com.vagrant.vagrant'
 end

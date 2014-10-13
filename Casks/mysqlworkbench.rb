@@ -1,7 +1,12 @@
 class Mysqlworkbench < Cask
-  url 'http://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.1.4-osx-i686.dmg'
+  version '6.2.3'
+  sha256 '0a66707a03d83a70f1ced521ac0954ee56ff9a6e86f81e01d03df723755e9186'
+
+  url "https://cdn.mysql.com/Downloads/MySQLGUITools/mysql-workbench-community-#{version}-osx-i686.dmg"
+  gpg "#{url}.asc",
+      :key_id => '8c718d3b5072e1f5'
   homepage 'http://www.mysql.com/products/workbench'
-  version '6.1.4'
-  sha256 '0b277aebe55ae0077ea94d3d7dff248e4d71dfe882fc574780b98907785ab9d6'
-  link 'MySQLWorkbench.app'
+  license :unknown
+
+  app 'MySQLWorkbench.app'
 end

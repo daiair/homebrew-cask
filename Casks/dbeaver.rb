@@ -1,7 +1,10 @@
 class Dbeaver < Cask
-  url 'http://dbeaver.jkiss.org/files/dbeaver-2.3.5-macosx.cocoa.x86_64.zip'
+  version '3.0.1'
+  sha256 '0e2e7e403c8c0c5f6b2291e8a2bdfba5730dffa9a2fb363c1c98e60e868412d7'
+
+  url "http://dbeaver.jkiss.org/files/dbeaver-#{version}-macosx.cocoa.x86_64.zip"
   homepage 'http://dbeaver.jkiss.org/'
-  version '2.3.5'
-  sha256 '28b7ba065950e0632c388d0ffe1b250c626fa374c697eb0d0745eb6da6d5618a'
-  link 'dbeaver/dbeaver.app'
+  license :unknown
+
+  app 'dbeaver/dbeaver.app'
 end

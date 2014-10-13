@@ -1,12 +1,18 @@
-class Cask::CLI::List
+class Cask::CLI::List < Cask::CLI::Base
   def self.run(*arguments)
+    @options = Hash.new
+    @options[:one] = true if arguments.delete('-1')
+    @options[:long] = true if arguments.delete('-l')
+
     if arguments.any?
       retval = list_casks(*arguments)
     else
       retval = list_installed
     end
     # retval is ternary: true/false/nil
-    if retval.nil?
+    if retval.nil? and not arguments.any?
+      opoo "nothing to list"  # special case: avoid exit code
+    elsif retval.nil?
       raise CaskError.new("nothing to list")
     elsif ! retval
       raise CaskError.new("listing incomplete")
@@ -43,12 +49,19 @@ class Cask::CLI::List
   end
 
   def self.list_installed
-    columns = Cask.installed.map(&:to_s)
-    puts_columns columns
-    columns.empty? ? nil : Cask.installed.length == columns.length
+    installed_casks = Cask.installed
+    columns = installed_casks.map(&:to_s)
+    if @options[:one]
+      puts columns
+    elsif @options[:long]
+      puts Cask::SystemCommand.run!("/bin/ls", :args => ["-l", Cask.caskroom]).stdout
+    else
+      puts_columns columns
+    end
+    columns.empty? ? nil : installed_casks.length == columns.length
   end
 
   def self.help
-    "with no args, lists installed casks; given installed casks, lists installed files"
+    "with no args, lists installed Casks; given installed Casks, lists installed files"
   end
 end

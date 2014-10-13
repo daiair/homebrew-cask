@@ -1,7 +1,11 @@
 class Asteroid < Cask
-  url "http://www.asteroidapp.com/downloader.php?Ver=latest"
+  version :latest
+  sha256 :no_check
+
+  url 'http://www.asteroidapp.com/downloader.php?Ver=latest'
+  appcast 'http://www.asteroidapp.com/appupdates.php'
   homepage 'http://www.asteroidapp.com/'
-  version 'latest'
-  no_checksum
-  link 'Asteroid.app'
+  license :unknown
+
+  app 'Asteroid.app'
 end

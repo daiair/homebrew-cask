@@ -1,7 +1,10 @@
 class Shadowsocksx < Cask
-  url 'http://downloads.sourceforge.net/project/shadowsocksgui/dist/ShadowsocksX-1.0.6.dmg'
+  version '2.2'
+  sha256 '8cedc4fba2e1c64ca110c57edcc435f3006b8d5567966685b97c429c8f7c844e'
+
+  url "https://downloads.sourceforge.net/project/shadowsocksgui/dist/ShadowsocksX-#{version}.dmg"
   homepage 'https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-Help'
-  version '1.0.6'
-  sha256 '3b2d5289043f905897abc9ac395189201718acde79bd782c46a1e9ed6c32892d'
-  link 'ShadowsocksX.app'
+  license :oss
+
+  app 'ShadowsocksX.app'
 end

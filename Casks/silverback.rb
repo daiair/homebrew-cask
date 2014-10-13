@@ -1,7 +1,11 @@
 class Silverback < Cask
-  url 'http://silverback.s3.amazonaws.com/silverback2.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'https://silverback.s3.amazonaws.com/silverback2.zip'
+  appcast 'http://silverback.s3.amazonaws.com/release/appcast.xml'
   homepage 'http://silverbackapp.com/'
-  version 'latest'
-  no_checksum
-  link 'Silverback.app'
+  license :unknown
+
+  app 'Silverback.app'
 end

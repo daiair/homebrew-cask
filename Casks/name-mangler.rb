@@ -1,7 +1,11 @@
 class NameMangler < Cask
+  version :latest
+  sha256 :no_check
+
   url 'http://manytricks.com/download/namemangler'
-  version 'latest'
+  appcast 'http://manytricks.com/namemangler/appcast.xml'
   homepage 'http://manytricks.com/namemangler/'
-  no_checksum
-  link 'Name Mangler.app'
+  license :unknown
+
+  app 'Name Mangler.app'
 end

@@ -1,7 +1,10 @@
 class Ibank < Cask
-  url 'http://www.iggsoft.com/ibank/iBank4_Web.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'https://www.iggsoft.com/ibank/iBank5_Web.dmg'
   homepage 'http://www.iggsoftware.com/ibank'
-  version 'latest'
-  no_checksum
-  link 'iBank.app'
+  license :unknown
+
+  app 'iBank 5.app'
 end

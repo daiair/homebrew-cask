@@ -1,7 +1,10 @@
 class Linein < Cask
-  url 'http://www.rogueamoeba.com/freebies/download/LineIn.zip'
+  version :latest
+  sha256 :no_check
+
+  url 'https://www.rogueamoeba.com/freebies/download/LineIn.zip'
   homepage 'http://www.rogueamoeba.com/freebies/'
-  version 'latest'
-  no_checksum
-  link 'LineIn.app'
+  license :unknown
+
+  app 'LineIn.app'
 end

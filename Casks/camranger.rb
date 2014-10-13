@@ -1,7 +1,10 @@
 class Camranger < Cask
-  url 'http://www.camranger.com/downloadFiles/CamRanger_1_7.zip'
+  version '1.8'
+  sha256 'fe27f11d08df3119d99c5b72b8a5214f5a34e491b43943bfc2b2f1fde905882d'
+
+  url "http://www.camranger.com/downloadFiles/CamRanger_#{version.gsub('.', '_')}.zip"
   homepage 'http://www.camranger.com/downloads/#fbox_5594'
-  version '1.7'
-  sha256 '6befc62ccffa059d042dea6d0fc7b0227f7189dafe0f48bbae685db9fdb1b6e9'
-  link '1.6/CamRanger.app'
+  license :unknown
+
+  app "#{version}/CamRanger.app"
 end

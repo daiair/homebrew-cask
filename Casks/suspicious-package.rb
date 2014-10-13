@@ -1,7 +1,11 @@
 class SuspiciousPackage < Cask
-  url 'http://www.mothersruin.com/software/downloads/SuspiciousPackage.dmg'
+  version :latest
+  sha256 :no_check
+
+  url 'http://www.mothersruin.com/software/downloads/SuspiciousPackage.pkg'
   homepage 'http://www.mothersruin.com/software/SuspiciousPackage/'
-  version 'latest'
-  no_checksum
-  qlplugin 'Suspicious Package.qlgenerator'
+  license :unknown
+
+  pkg 'SuspiciousPackage.pkg'
+  uninstall :pkgutil => 'com.mothersruin.pkg.SuspiciousPackagePlugin'
 end
