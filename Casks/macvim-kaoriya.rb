@@ -4,5 +4,4 @@ class MacvimKaoriya < Cask
   version '7.4.133'
   sha256 '0a87ec0cb28e3b40eec6deb90e9e41ba44937f80de0c154cf80865414a6900b3'
   link 'MacVim.app'
-  binary '/Applications/MacVim.app/Contents/MacOS/mvim'
 end
