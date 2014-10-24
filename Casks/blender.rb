@@ -1,10 +1,10 @@
 class Blender < Cask
-  version '2.72'
-  sha256 '07f77c68c171ec6c32af85ce8430c843dabd5d208c0d352bb15f6208fb77dab1'
+  version '2.72b'
+  sha256 'b015f030c416d4aa09617f33e93bba3429624dbbb203fb4b6e728257e61b3d5c'
 
-  url "http://download.blender.org/release/Blender#{version}/blender-#{version}-OSX_10.6-x86_64.zip"
+  url "http://download.blender.org/release/Blender2.72/blender-#{version}-OSX_10.6-x86_64.zip"
   homepage 'http://www.blender.org/'
-  license :unknown
+  license :gpl
 
   app 'Blender/blender.app'
   app 'Blender/blenderplayer.app'

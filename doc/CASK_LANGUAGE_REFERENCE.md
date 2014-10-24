@@ -14,12 +14,16 @@ Cask Domain-Specific Language (DSL) which are not needed in most cases.
  * [Caveats Stanza Details](#caveats-stanza-details)
  * [Checksum Stanza Details](#checksum-stanza-details)
  * [URL Stanza Details](#url-stanza-details)
+ * [Appcast Stanza Details](#appcast-stanza-details)
  * [Tags Stanza Details](#tags-stanza-details)
  * [License Stanza Details](#license-stanza-details)
+ * [GPG Stanza Details](#gpg-stanza-details)
  * [App Stanza Details](#app-stanza-details)
  * [Suite Stanza Details](#suite-stanza-details)
  * [Pkg Stanza Details](#pkg-stanza-details)
+ * [Installer Stanza Details](#installer-stanza-details)
  * [Depends_on Stanza Details](#depends_on-stanza-details)
+ * [Conflicts_with Stanza Details](#conflicts_with-stanza-details)
  * [Uninstall Stanza Details](#uninstall-stanza-details)
  * [Zap Stanza Details](#zap-stanza-details)
  * [Arbitrary Ruby Methods](#arbitrary-ruby-methods)
@@ -95,6 +99,7 @@ Each Cask must declare one or more *artifacts* (i.e. something to install)
 | `widget`           | yes                           | relative path to a widget that should be linked into the `~/Library/Widgets` folder on installation (ALPHA: DOES NOT WORK YET)
 | `suite`            | yes                           | relative path to a containing directory that should be linked into the `~/Applications` folder on installation (see also [Suite Stanza Details](#suite-stanza-details))
 | `artifact`         | yes                           | relative path to an arbitrary path that should be symlinked on installation.  This is only for unusual cases.  The `app` stanza is strongly preferred when linking `.app` bundles.
+| `installer`        | yes                           | describes an executable which must be run to complete the installation.  (see [Installer Stanza Details](#installer-stanza-details))
 
 ## Optional Stanzas
 
@@ -102,7 +107,9 @@ Each Cask must declare one or more *artifacts* (i.e. something to install)
 | ---------------------- |------------------------------ | ----------- |
 | `uninstall`            | yes                           | procedures to uninstall a Cask. Optional unless the `pkg` stanza is used. (see also [Uninstall Stanza Details](#uninstall-stanza-details))
 | `zap`                  | yes                           | additional procedures for a more complete uninstall, including user files and shared resources. (see also [Zap Stanza Details](#zap-stanza-details))
+| `appcast`              | no                            | a URL providing an appcast feed to find updates for this Cask.  (see also [Appcast Stanza Details](#appcast-stanza-details))
 | `depends_on`           | yes                           | a list of dependencies required by this Cask (see also [Depends_on Stanza Details](#depends_on-stanza-details))
+| `conflicts_with`       | yes                           | a list of conflicts with this Cask (*not yet functional* see also [Conflicts_with Stanza Details](#conflicts_with-stanza-details))
 | `caveats`              | yes                           | a string or Ruby block providing the user with Cask-specific information at install time (see also [Caveats Stanza Details](#caveats-stanza-details))
 | `preflight`            | yes                           | a Ruby block containing preflight install operations (needed only in very rare cases)
 | `postflight`           | yes                           | a Ruby block containing postflight install operations
@@ -111,33 +118,35 @@ Each Cask must declare one or more *artifacts* (i.e. something to install)
 | `container :nested =>` | no                            | relative path to an inner container that must be extracted before moving on with the installation; this allows us to support dmg inside tar, zip inside dmg, etc.
 | `container :type =>`   | no                            | a symbol to override container-type autodetect. may be one of: `:air`, `:bz2`, `:cab`, `:dmg`, `:generic_unar`, `:gzip`, `:otf`, `:pkg`, `:rar`, `:seven_zip`, `:sit`, `:tar`, `:ttf`, `:xar`, `:zip`, `:naked`.  (example [parse.rb](../Casks/parse.rb))
 | `tags`                 | no                            | a list of key-value pairs for Cask annotation.  Not free-form.  (see also [Tags Stanza Details](#tags-stanza-details))
+| `gpg`                  | no                            | *stub: not yet functional.*  (see also [GPG Stanza Details](#gpg-stanza-details))
 
 
 ## Legacy Stanzas
 
 The following stanzas are no longer in use.
 
-| name                 | multiple occurrences allowed? | meaning     |
-| -------------------- |------------------------------ | ----------- |
-| `after_install`      | yes                           | an obsolete alternative to `postflight`
-| `after_uninstall`    | yes                           | an obsolete alternative to `uninstall_postflight`
-| `before_install`     | yes                           | an obsolete alternative to `preflight`
-| `before_uninstall`   | yes                           | an obsolete alternative to `uninstall_preflight`
-| `container_type`     | yes                           | an obsolete alternative to `container :type =>`
-| `depends_on_formula` | yes                           | an obsolete alternative to `depends_on :formula =>`
-| `install`            | yes                           | an obsolete alternative to `pkg`
-| `link`               | yes                           | an obsolete alternative to `artifact`
-| `no_checksum`        | no                            | an obsolete alternative to `sha256 :no_check`
+| name                      | meaning     |
+| ------------------------- | ----------- |
+| `after_install`           | an obsolete alternative to `postflight`
+| `after_uninstall`         | an obsolete alternative to `uninstall_postflight`
+| `before_install`          | an obsolete alternative to `preflight`
+| `before_uninstall`        | an obsolete alternative to `uninstall_preflight`
+| `container_type`          | an obsolete alternative to `container :type =>`
+| `depends_on_formula`      | an obsolete alternative to `depends_on :formula =>`
+| `install`                 | an obsolete alternative to `pkg`
+| `link`                    | an obsolete alternative to `artifact`
+| `no_checksum`             | an obsolete alternative to `sha256 :no_check`
 
 
 ## Legacy Forms
 
 The following forms are no longer in use.
 
-| name                 | meaning     |
-| -------------------- | ----------- |
-| `uninstall :files`   | an obsolete alternative to `uninstall :delete`
-| `version 'latest'`   | an obsolete alternative to `version :latest`
+| name                      | meaning     |
+| ------------------------- | ----------- |
+| `uninstall :files`        | an obsolete alternative to `uninstall :delete`
+| `version 'latest'`        | an obsolete alternative to `version :latest`
+| `manual_installer(path)`  | when occurring within `caveats`, an obsolete alternative to `installer :script`
 
 
 ## Conditional Statements
@@ -200,8 +209,8 @@ position at the end of the Cask:
 | `title`            | the Cask title
 | `version`          | the Cask version
 | `homepage`         | the Cask homepage
-| `caskroom_path`    | eg `/opt/homebrew-cask/Caskroom`
-| `destination_path` | the staging location for this Cask, including version number, *eg* `/opt/homebrew-cask/Caskroom/adium/1.5.10`
+| `caskroom_path`    | the containing directory for all staged Casks, typically `/opt/homebrew-cask/Caskroom`
+| `staged_path`      | the staged location for this Cask, including version number, *eg* `/opt/homebrew-cask/Caskroom/adium/1.5.10`
 
 Example:
 
@@ -223,7 +232,6 @@ The following methods may be called to generate standard warning messages:
 
 | method                            | description |
 | --------------------------------- | ----------- |
-| `manual_installer(path)`          | The user should execute an installer to complete the installation. `path` may be absolute, or relative to the Cask.
 | `path_environment_variable(path)` | The user should make sure `path` is in their `$PATH` environment variable
 | `zsh_path_helper(path)`           | Zsh users must take additional steps to make sure `path` is in their `$PATH` environment variable
 | `logout`                          | The user should log out and log back in to complete installation
@@ -285,7 +293,6 @@ have to test each of them:
 $ ./developer/bin/list_url_attributes_on_file <file>
 ```
 
-
 ### Subversion URLs
 
 In rare cases, a distribution may not be available over ordinary HTTP/S.
@@ -297,6 +304,22 @@ following key/value pairs to `url`:
 | `:using`           | the symbol `:svn` is the only legal value
 | `:revision`        | a string identifying the subversion revision to download
 | `:trust_cert`      | set to `true` to automatically trust the certificate presented by the server (avoiding an interactive prompt)
+
+
+## Appcast Stanza Details
+
+The value of the `appcast` stanza is a string, holding the URL for an
+appcast which provides information on future updates.  Generally, the
+appcast URL returns Sparkle-compatible XML, though that is not required.
+
+Example: [adium.rb](../../d7f8eafa4fc01a6c383925d9962b5da33876a8b6/Casks/adium.rb#L6)
+
+### Additional Appcast Parameters
+
+| key                | value       |
+| ------------------ | ----------- |
+| `:sha256`          | a string holding the SHA-256 checksum of the most recent appcast which matches the current Cask versioning
+| `:format`          | a symbol describing the appcast format.  One of: `:sparkle`, `:plaintext`, `:unknown`, where `:sparkle` is the default.
 
 
 ## License Stanza Details
@@ -367,6 +390,22 @@ using the information stored in the `tags` stanza.
 | ------------- | -----------------------------
 | `:name`       | Alternate name for the Cask. (example [smlnj.rb](../Casks/smlnj.rb))
 | `:vendor`     | The full-text official name of the producer of the software: an author or corporate name, as appropriate.  As the value is intended as a search target, commonly shared abbreviations such as `Dr.` or `Inc.` should be omitted. (example [google-chrome.rb](../Casks/google-chrome.rb))
+
+
+## GPG Stanza Details
+
+**This is a stub for upcoming functionality, and is not fully documented**.
+
+The `gpg` stanza contains signature information for GPG-signed distributions.
+The form is
+
+```ruby
+gpg <signature>, <parameter> => <value>
+```
+
+where `<parameter>` is one of `:key_id` or `:key_url`, and `<signature>` points
+to the detached signature of the distribution.  Commonly, the signature
+follows the `url` value.  Example: [libreoffice.rb](../Casks/libreoffice.rb).
 
 
 ## App Stanza Details
@@ -463,6 +502,42 @@ Example:
 pkg 'Soundflower.pkg', :allow_untrusted => true
 ```
 
+
+## Installer Stanza Details
+
+The `installer` stanza takes a series of key-value pairs, the first key of
+which must be `:manual` or `:script`.
+
+### Installer :manual
+
+`installer :manual` takes a single string value, describing a GUI installer
+which must be run by the user at a later time.  The path may be absolute,
+or relative to the Cask.  Example:
+
+```ruby
+installer :manual => 'Little Snitch Installer.app'
+```
+### Installer :script
+
+`installer :script` introduces a series of key-value pairs describing
+a command which will automate completion of the install.  The form is
+similar to `uninstall :script`:
+
+| key             | value
+| ----------------|------------------------------
+| `:script`       | path to an install script to be run via `sudo`. (Required first key.)
+| `:args`         | array of arguments to the install script
+| `:input`        | array of lines of input to be sent to `stdin` of the script
+| `:must_succeed` | set to `false` if the script is allowed to fail
+| `:sudo`         | set to `false` if the script does not need `sudo`
+
+The path may be absolute, or relative to the Cask.  Example:
+
+```ruby
+installer :script => 'Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer',
+          :args => %w[-silent]
+```
+
 ## Depends_on Stanza Details
 
 `depends_on` is used to declare dependencies required to install a Cask
@@ -483,6 +558,26 @@ key with working functionality at the time of writing.
 | key        | description |
 | ---------- | ----------- |
 | `:formula` | A Homebrew Formula
+| `:cask`    | *stub - not yet functional*
+| `:macos`   | *stub - not yet functional*
+| `:arch`    | *stub - not yet functional*
+| `:x11`     | *stub - not yet functional*
+| `:java`    | *stub - not yet functional*
+
+
+## conflicts_with Stanza Details
+
+`conflicts_with` is used to declare conflicts that keep a Cask from
+installing or working correctly.
+
+Several keys are accepted by `conflicts_with`, but none of them are yet
+enforced by the backend implementation.  It is fine to proactively add
+`conflicts_with` stanzas to Casks in anticipation of future backend support;
+they are currently just a type of structured comment.
+
+| key        | description |
+| ---------- | ----------- |
+| `:formula` | *stub - not yet functional*
 | `:cask`    | *stub - not yet functional*
 | `:macos`   | *stub - not yet functional*
 | `:arch`    | *stub - not yet functional*
@@ -764,7 +859,7 @@ define arbitrary Ruby variables and methods inside the Cask by creating a
 
 ```ruby
 class Appname < Cask
-  Module Utils
+  module Utils
     def self.arbitrary_method
       ...
     end

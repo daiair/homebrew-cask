@@ -49,9 +49,9 @@ class Cask::Installer
       download
       extract_primary_container
       install_artifacts
-    rescue
+    rescue StandardError => e
       purge_versioned_files
-      raise
+      raise e
     end
 
     puts summary
@@ -63,7 +63,7 @@ class Cask::Installer
     else
       "#{Tty.blue}==>#{Tty.white} Success!#{Tty.reset} "
     end
-    s << "#{@cask} installed to '#{@cask.destination_path}' (#{@cask.destination_path.cabv})"
+    s << "#{@cask} staged at '#{@cask.staged_path}' (#{@cask.staged_path.cabv})"
   end
 
   def download
@@ -76,7 +76,7 @@ class Cask::Installer
 
   def extract_primary_container
     odebug "Extracting primary container"
-    FileUtils.mkdir_p @cask.destination_path
+    FileUtils.mkdir_p @cask.staged_path
     container = if @cask.container_type
        Cask::Container.from_type(@cask.container_type)
     else
@@ -155,14 +155,36 @@ class Cask::Installer
   # this feels like a class method, but uses @command
   def permissions_rmtree(path)
     if path.respond_to?(:rmtree) and path.exist?
+      tried_permissions = false
+      tried_ownership = false
       begin
         path.rmtree
-      rescue
+      rescue StandardError => e
         # in case of permissions problems
-        if path.exist?
-          @command.run('/bin/chmod', :args => ['-R', '--', 'u+rwx', path])
-          @command.run('/bin/chmod', :args => ['-R', '-N',          path])
-          path.rmtree
+        if path.exist? and !tried_permissions
+          begin
+            # todo Better handling for the case where path is a symlink.
+            #      The -h and -R flags cannot be combined, and behavior is
+            #      dependent on whether the file argument has a trailing
+            #      slash.  This should do the right thing, but is fragile.
+            @command.run!('/usr/bin/chflags', :args => ['-R', '--', '000',   path])
+            @command.run!('/bin/chmod',       :args => ['-R', '--', 'u+rwx', path])
+            @command.run!('/bin/chmod',       :args => ['-R', '-N',          path])
+          rescue StandardError => e
+            unless tried_ownership
+              # in case of ownership problems
+              # todo Further examine files to see if ownership is the problem
+              #      before using sudo+chown
+              ohai "Using sudo to gain ownership of path '#{path}'"
+              current_user = Etc.getpwuid(Process.euid).name
+              @command.run('/usr/sbin/chown', :args => ['-R', '--', current_user, path],
+                                              :sudo => true)
+              tried_ownership = true
+              retry # permissions
+            end
+          end
+          tried_permissions = true
+          retry # rmtree
         end
       end
     end
@@ -172,7 +194,7 @@ class Cask::Installer
     odebug "Purging files for version #{@cask.version} of Cask #{@cask}"
 
     # versioned staged distribution
-    permissions_rmtree(@cask.destination_path)
+    permissions_rmtree(@cask.staged_path)
 
     # Homebrew-cask metadata
     if @cask.metadata_versioned_container_path.respond_to?(:children) and
