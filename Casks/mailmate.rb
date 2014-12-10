@@ -1,10 +1,10 @@
-class Mailmate < Cask
+cask :v1 => 'mailmate' do
   version :latest
   sha256 :no_check
 
   url 'http://dl.mailmate-app.com/MailMate.tbz'
   homepage 'http://freron.com/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'MailMate.app'
   binary 'MailMate.app/Contents/Resources/emate'

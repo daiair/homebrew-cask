@@ -1,10 +1,10 @@
-class Teamviewer < Cask
+cask :v1 => 'teamviewer' do
   version :latest
   sha256 :no_check
 
   url 'https://download.teamviewer.com/download/TeamViewer.dmg'
   homepage 'http://www.teamviewer.com/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   pkg 'Install TeamViewer.pkg'
 

@@ -1,4 +1,4 @@
-class Cocktail < Cask
+cask :v1 => 'cocktail' do
   version :latest
   sha256 :no_check
 
@@ -20,7 +20,7 @@ class Cocktail < Cask
   end
 
   homepage 'http://www.maintain.se/cocktail'
-  license :unknown
+  license :commercial
 
   app 'Cocktail.app'
 end

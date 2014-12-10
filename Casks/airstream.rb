@@ -1,10 +1,10 @@
-class Airstream < Cask
+cask :v1 => 'airstream' do
   version :latest
   sha256 :no_check
 
   url 'http://airstream.io/download/mac/airstream-mac.dmg'
   homepage 'http://airstream.io/download/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
   app 'AirStream.app'
 
   caveats <<-EOS.undent

@@ -1,4 +1,4 @@
-class Middleclick < Cask
+cask :v1 => 'middleclick' do
   version :latest
   sha256 :no_check
 
@@ -10,7 +10,7 @@ class Middleclick < Cask
     url 'http://clement.beffa.org/labs/downloads/MiddleClick-maverick.zip'
   end
   homepage 'http://clement.beffa.org/labs/projects/middleclick'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'MiddleClick.app'
 end

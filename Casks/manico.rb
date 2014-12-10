@@ -1,12 +1,12 @@
-class Manico < Cask
-  version '1.4.1'
-  sha256 'e29c4b0ccba830f0296fbec27122b2016c6dae0f76d5635d5d080d2031fe2d88'
+cask :v1 => 'manico' do
+  version '1.4.3'
+  sha256 '8116d5906d97d3725dd3b6ebcf19f992db093da4e236adee2b47b0ed6fc2d6ea'
 
   url "http://manico.im/static/Manico_#{version}.dmg"
   appcast 'http://manico.im/static/manico-appcast.xml',
-          :sha256 => 'c42b1494a355c603ad4eadbc229af7b12814989f6e760e2d67dbdebcbb121178'
+          :sha256 => 'cbdf604b5078b58c559ed17759f2db444a5ec417bc8e663e024df735bc9d96fb'
   homepage 'http://manico.im/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'Manico.app'
 end

@@ -1,4 +1,4 @@
-class Xquartz < Cask
+cask :v1 => 'xquartz' do
   version '2.7.7'
   sha256 'c9b3a373b7fd989331117acb9696fffd6b9ee1a08ba838b02ed751b184005211'
 
@@ -6,7 +6,7 @@ class Xquartz < Cask
   appcast 'http://xquartz-dl.macosforge.org/sparkle/release.xml',
           :sha256 => '9792f0d6abd547e523f6ca33c4dd3847134bc3d46d77ac91b93fe932d6123568'
   homepage 'http://xquartz.macosforge.org/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   pkg 'XQuartz.pkg'
 

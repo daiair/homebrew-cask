@@ -1,29 +1,32 @@
-class IntellijIdeaCe < Cask
-  version '13.1.5'
-  sha256 '1db4938b41de9e340e196bd76f0482f9a329d0a660a9c583fb502c3208731c81'
+cask :v1 => 'intellij-idea-ce' do
+  version '14.0.2'
+  sha256 'e03e2a60b4bc067575cd75d27cc3b59209dcbd68c0567a8f24ab19d83ac1c986'
 
   url "http://download.jetbrains.com/idea/ideaIC-#{version}.dmg"
-  homepage 'https://www.jetbrains.com/idea/index.html'
+  homepage 'https://www.jetbrains.com/idea/'
   license :oss
 
-  app 'IntelliJ IDEA 13 CE.app'
+  app 'IntelliJ IDEA 14 CE.app'
 
   postflight do
-    system '/usr/libexec/PlistBuddy', '-c', 'Set :JVMOptions:JVMVersion 1.6+', "#{destination_path}/IntelliJ IDEA 13 CE.app/Contents/Info.plist"
+    plist_set(':JVMOptions:JVMVersion', '1.6+')
   end
 
   zap :delete => [
-                  '~/Library/Application Support/IntelliJIdea13',
-                  '~/Library/Preferences/IntelliJIdea13',
+                  '~/Library/Application Support/IdeaIC14',
+                  '~/Library/Preferences/IdeaIC14',
+                  '~/Library/Caches/IdeaIC14',
+                  '~/Library/Logs/IdeaIC14',
                  ]
 
+  # todo: transitional, replace #{self.name...} with #{token}
   caveats <<-EOS.undent
-    #{title} may require Java 7 (an older version), available from the
+    #{self.name.sub(/^KlassPrefix/,'').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').downcase} may require Java 7 (an older version), available from the
     caskroom-versions repository via
 
       brew cask install caskroom/versions/java7
 
-    Alternatively, #{title} can be modified to use Java 8 as described in
+    Alternatively, #{self.name.sub(/^KlassPrefix/,'').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').downcase} can be modified to use Java 8 as described in
 
       https://github.com/caskroom/homebrew-cask/issues/4500#issuecomment-43955932
   EOS

@@ -3,13 +3,8 @@ class Cask::WithoutSource < Cask
     caskroom_path.children.first
   end
 
-  # todo transitional method, removeme after DSL 1.0
-  def destination_path
-    staged_path
-  end
-
   def to_s
-    "#{title} (!)"
+    "#{token} (!)"
   end
 
   def installed?

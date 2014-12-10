@@ -1,13 +1,14 @@
-class Sizeup < Cask
+cask :v1 => 'sizeup' do
   version :latest
   sha256 :no_check
 
   url 'https://www.irradiatedsoftware.com/download/SizeUp.zip'
   appcast 'http://www.irradiatedsoftware.com/updates/profiles/sizeup.php'
   homepage 'http://www.irradiatedsoftware.com/sizeup/index.html'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'SizeUp.app'
+
   zap :delete => [
                   '~/Library/Preferences/com.irradiatedsoftware.SizeUp.plist',
                   '~/Library/Application Support/SizeUp',

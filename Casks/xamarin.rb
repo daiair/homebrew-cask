@@ -1,10 +1,10 @@
-class Xamarin < Cask
+cask :v1 => 'xamarin' do
   version :latest
   sha256 :no_check
 
   url 'http://download.xamarin.com/Installer/Mac/XamarinInstaller.dmg'
   homepage 'http://xamarin.com/platform'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   installer :manual => 'Install Xamarin.app'
 

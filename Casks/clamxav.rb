@@ -1,4 +1,4 @@
-class Clamxav < Cask
+cask :v1 => 'clamxav' do
   version '2.6.4'
   sha256 'bbde8181307566bd592930f7318a7c43e253788bf44bab9bae1140b1e50e694f'
 
@@ -6,7 +6,7 @@ class Clamxav < Cask
   appcast 'http://www.clamxav.com/sparkle/profileInfo.php',
           :sha256 => '1f7fa2a5dfa1e59e32982721d5cf3292d1d2568ee22d802904566275b9e680e0'
   homepage 'http://www.clamxav.com/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'ClamXav.app'
 

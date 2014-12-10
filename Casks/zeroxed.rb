@@ -1,10 +1,10 @@
-class Zeroxed < Cask
+cask :v1 => 'zeroxed' do
   version :latest
   sha256 :no_check
 
   url 'http://www.suavetech.com/cgi-bin/download.cgi?0xED.tar.bz2'
   homepage 'http://www.suavetech.com/0xed/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app '0xED.app'
 

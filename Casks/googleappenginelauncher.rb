@@ -1,10 +1,12 @@
-class Googleappenginelauncher < Cask
-  version '1.9.13'
-  sha256 '6b5f8253518e31cc1723b69956a36f29577ab84b7431413406a33d807e92c15d'
+cask :v1 => 'googleappenginelauncher' do
+  version '1.9.15'
+  sha256 '403a1df731537de41307a6245e3265b921c058c0c3ccc6dcedf0dd93439eff47'
 
   url "https://storage.googleapis.com/appengine-sdks/featured/GoogleAppEngineLauncher-#{version}.dmg"
+  appcast 'https://storage.googleapis.com/appengine-sdks',
+          :sha256 => '5d863bd317e9ee27e4268fb4413846ab15928757de0723a62fb8ad0c238a44af'
   homepage 'https://developers.google.com/appengine/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'GoogleAppEngineLauncher.app'
 end

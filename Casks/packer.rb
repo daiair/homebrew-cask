@@ -1,10 +1,10 @@
-class Packer < Cask
+cask :v1 => 'packer' do
   version '0.7.2'
   sha256 'bed7ddc255b5b71b139de5e30d4221926cd314a87baf0b937ba7a97c196b1286'
 
   url "https://dl.bintray.com/mitchellh/packer/packer_#{version}_darwin_amd64.zip"
   homepage 'http://www.packer.io/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   binary 'packer'
   binary 'packer-builder-amazon-chroot'

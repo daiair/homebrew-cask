@@ -1,6 +1,6 @@
-class Xld < Cask
-  version '20140504'
-  sha256 '48183d866d9b62f5a71d885d6391040b76a736081ce52c7247e0ba6208e82918'
+cask :v1 => 'xld' do
+  version '20141129'
+  sha256 'adbf053cb2b24fb342302932b90ec745740d0421d6b5fbf48c5c35367538d9fd'
 
   url "https://downloads.sourceforge.net/project/xld/xld-#{version}.dmg"
   appcast 'http://xld.googlecode.com/svn/appcast/xld-appcast_e.xml',
@@ -9,6 +9,7 @@ class Xld < Cask
   license :oss
 
   app 'XLD.app'
+
   zap :delete => [
                   '~/Library/Application Support/XLD',
                   '~/Library/Preferences/jp.tmkk.XLD.plist',

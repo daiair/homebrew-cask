@@ -1,10 +1,13 @@
-class Karabiner < Cask
+cask :v1 => 'karabiner' do
   version '10.4.0'
   sha256 'b1e3ffb7cd10ec8651c68b184c236589f182a273dad4b1c68ab2c15d36a34248'
 
   url "https://pqrs.org/osx/karabiner/files/Karabiner-#{version}.dmg"
+  # todo
+  # name 'Karabiner'
+  # name 'Keyremap4Macbook'
   homepage 'https://pqrs.org/osx/karabiner/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   pkg 'Karabiner.pkg'
   binary '/Applications/Karabiner.app/Contents/Library/vendor/bin/blueutil'

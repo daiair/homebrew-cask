@@ -1,4 +1,4 @@
-class Plover < Cask
+cask :v1 => 'plover' do
   version '2.5.8'
   sha256 'a8bbeddb5d6fb8d4499844257035edd62e431a4f1eb7959bdf17a15c1cbe12de'
 
@@ -8,7 +8,13 @@ class Plover < Cask
 
   app 'plover.app'
 
+  # todo: replace with new assistive_devices stanza
   caveats do
-    assistive_devices
+    <<-EOS.undent
+      To use #{@cask}, you may need to give it access to assistive
+      devices (Accessibility).  For OS X Mavericks and Above:
+
+        System Preferences / Security & Privacy / Privacy / Accessibility
+    EOS
   end
 end

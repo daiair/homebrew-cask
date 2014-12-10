@@ -1,11 +1,12 @@
-class Menumeters < Cask
+cask :v1 => 'menumeters' do
   version :latest
   sha256 :no_check
 
   url 'http://www.ragingmenace.com/software/download/MenuMeters.dmg'
   homepage 'http://www.ragingmenace.com/software/menumeters/'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   prefpane 'MenuMeters Installer.app/Contents/Resources/MenuMeters.prefPane'
+
   zap :delete => '~/Library/Preferences/com.ragingmenace.MenuMeters.plist'
 end

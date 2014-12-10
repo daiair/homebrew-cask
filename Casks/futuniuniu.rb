@@ -1,10 +1,12 @@
-class Futuniuniu < Cask
-  version '2.14.316'
-  sha256 'abe44dc80551e6cfaea7bc2265997766fd3fadd68a2f859193db732598516028'
+cask :v1 => 'futuniuniu' do
+  version '2.16.358'
+  sha256 'a92df2f8c0cdc66b9f23df44885d8ee3c3b67520ee97f783f3523fbb4aaf7775'
 
-  url 'http://www.futu5.com/client/nn/mac/FTNNForMac_2.14.316_0904.dmg'
+  url 'https://www.futu5.com/client/nn/mac/FTNNForMac_2.16.358_1209.dmg'
   homepage 'http://www.futu5.com'
   license :commercial
 
-  app 'FutuNiuniu.app'
+  # Renamed for consistency: app name is different in the Finder and in a shell.
+  # Original discussion: https://github.com/caskroom/homebrew-cask/pull/7435
+  app 'FutuNiuniu.app', :target => '富途牛牛.app'
 end

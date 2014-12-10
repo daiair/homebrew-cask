@@ -1,11 +1,11 @@
-class Flux < Cask
+cask :v1 => 'flux' do
   version :latest
   sha256 :no_check
 
   url 'https://justgetflux.com/mac/Flux.zip'
   appcast 'https://justgetflux.com/mac/macflux.xml'
   homepage 'http://justgetflux.com'
-  license :unknown
+  license :unknown    # todo: improve this machine-generated value
 
   app 'Flux.app'
 
