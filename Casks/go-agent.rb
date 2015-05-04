@@ -3,8 +3,9 @@ cask :v1 => 'go-agent' do
   sha256 'b3886afe748bbba3dccd0f3282af4e1860ca93223a5a70bf22a3b132adeb3701'
 
   url "http://download.go.cd/gocd/go-agent-#{version}-osx.zip"
+  name 'Go Agent'
   homepage 'http://www.go.cd'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Go Agent.app'
 end

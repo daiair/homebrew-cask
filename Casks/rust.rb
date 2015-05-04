@@ -1,12 +1,13 @@
 cask :v1 => 'rust' do
-  version :latest
-  sha256 :no_check
+  version '1.0.0-beta.3'
+  sha256 '1c6a3027efab9eee02a4a0cfc1552435f9c5e4a2f1da3d3292df2a900ed6fde2'
 
-  url 'http://static.rust-lang.org/dist/rust-nightly-x86_64-apple-darwin.pkg'
+  url "https://static.rust-lang.org/dist/rust-#{version}-x86_64-apple-darwin.pkg"
+  name 'Rust'
   homepage 'http://www.rust-lang.org/'
-  license :unknown    # todo: improve this machine-generated value
+  license :oss
 
-  pkg 'rust-nightly-x86_64-apple-darwin.pkg'
+  pkg "rust-#{version}-x86_64-apple-darwin.pkg"
 
   uninstall :pkgutil => 'org.rust-lang.rust'
 end

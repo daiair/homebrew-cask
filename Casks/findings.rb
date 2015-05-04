@@ -4,8 +4,9 @@ cask :v1 => 'findings' do
 
   url 'http://downloads.findingsapp.com/findings'
   appcast 'http://downloads.findingsapp.com/appcast.xml'
+  name 'Findings'
   homepage 'http://findingsapp.com'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   app 'Findings.app'
 end

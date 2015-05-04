@@ -1,10 +1,11 @@
 cask :v1 => 'synology-cloud-station' do
-  version '3317'
-  sha256 'd3305b5f2b4d47cf84e18cdbdb86a58578bff396fbe4664c4c778745098a362d'
+  version '3423'
+  sha256 'c800dca63285cc754b34806c4f0dde11fa1ca4d3d31aa8eeb8ca129555c094e2'
 
   url "https://global.download.synology.com/download/Tools/CloudStation/#{version}/Mac/synology-cloud-station-#{version}.dmg"
+  name 'Synology Cloud Station'
   homepage 'http://www.synology.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   pkg "synology-cloud-station-#{version}.pkg"
 

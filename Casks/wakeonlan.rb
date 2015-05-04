@@ -3,8 +3,9 @@ cask :v1 => 'wakeonlan' do
   sha256 '00d86efd23e9d5de5451e26d6957f3af1a1a3bc66d11c50b8563454113fd5ab1'
 
   url "http://www.readpixel.com/downloads/files/WakeOnLan#{version}.zip"
+  name 'WakeOnLan'
   homepage 'http://www.readpixel.com/wakeonlan/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'WakeOnLan/WakeOnLan.app'
 end

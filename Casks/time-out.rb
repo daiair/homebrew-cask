@@ -1,6 +1,6 @@
 cask :v1 => 'time-out' do
 
-  if MacOS.version <= :snow_leopard
+  if MacOS.release <= :snow_leopard
     version '1.6.5'
     sha256 '2ceec8d8938af0acf32af601337c129087bb3b8c132c1f18e6eb3581788b8a49'
   else
@@ -9,8 +9,9 @@ cask :v1 => 'time-out' do
   end
 
   url "http://www.dejal.com/download/timeout-#{version}.zip"
+  name 'Time Out'
   homepage 'http://www.dejal.com/timeout/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
 
   app 'Time Out.app'
 end

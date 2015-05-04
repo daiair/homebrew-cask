@@ -1,5 +1,5 @@
 cask :v1 => 'trash-it' do
-  if MacOS.version <= :leopard
+  if MacOS.release <= :leopard
     version '4.1'
     sha256 'a30ed22452d4c2fcefdbf2d892394524a3744ebd50fdcee2203ff705e648240e'
     url "http://nonamescriptware.com/wp-content/uploads/TrashIt#{version.gsub('.','')}.zip"
@@ -12,5 +12,5 @@ cask :v1 => 'trash-it' do
   end
 
   homepage 'http://nonamescriptware.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 end

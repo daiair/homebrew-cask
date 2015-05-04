@@ -2,10 +2,11 @@ cask :v1 => 'ionu' do
   version :latest
   sha256 :no_check
 
-  url 'https://isis.ionu.nu/release/OSX/IONU.dmg'
-  appcast 'https://isis.ionu.nu/release/OSX/appcast.xml'
+  url 'https://prod1.ionu.com/release/OSX/IONU.dmg'
+  appcast 'https://prod1.ionu.com/release/OSX/appcast.xml'
+  name 'IONU'
   homepage 'https://ionu.com'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'IONU.app'
 end

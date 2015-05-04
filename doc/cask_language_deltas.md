@@ -46,7 +46,6 @@ features which are available for the current Cask.
  * [`appcast`](CASK_LANGUAGE_REFERENCE.md#appcast-stanza-details)
  * [`artifact`](CASK_LANGUAGE_REFERENCE.md#at-least-one-artifact-stanza-is-also-required)
  * [`depends_on :cask`](CASK_LANGUAGE_REFERENCE.md#depends_on-stanza-details)
-   * *stub* - not yet functional
  * [`depends_on :java`](CASK_LANGUAGE_REFERENCE.md#depends_on-stanza-details)
    * *stub* - not yet functional
  * [`conflicts_with`](CASK_LANGUAGE_REFERENCE.md#conflicts_with-stanza-details)
@@ -125,7 +124,6 @@ features which are available for the current Cask.
  * [`uninstall`](CASK_LANGUAGE_REFERENCE.md#uninstall-stanza-details)
  * [`url`](CASK_LANGUAGE_REFERENCE.md#url-stanza-details)
  * [`version`](CASK_LANGUAGE_REFERENCE.md#required-stanzas)
- * [`widget`](CASK_LANGUAGE_REFERENCE.md#at-least-one-artifact-stanza-is-also-required)
  * [`zap`](CASK_LANGUAGE_REFERENCE.md#zap-stanza-details)
 
 
@@ -138,13 +136,18 @@ For use in *eg* interpolation:
  * [`token`](CASK_LANGUAGE_REFERENCE.md#caveats-as-a-string)
 
 
-## Caveats Mini-DSL (1.0)
+## Caveats Mini-DSL
+### (1.0)
 
  * [`files_in_usr_local`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
  * [`logout`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
  * [`path_environment_variable(path)`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
  * [`reboot`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
  * [`zsh_path_helper(path)`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
+
+### (1.1)
+ * [`discontinued`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
+ * [`free_license(web_page)`](CASK_LANGUAGE_REFERENCE.md#caveats-mini-dsl)
 
 
 ## Postflight Mini-DSL (1.0)

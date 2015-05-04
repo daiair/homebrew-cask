@@ -3,8 +3,9 @@ cask :v1 => 'rtx' do
   sha256 :no_check
 
   url 'http://www.rtxapp.com/download'
+  name 'RTX'
   homepage 'http://www.rtxapp.com/mac/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'RTX.app'
 end

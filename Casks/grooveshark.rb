@@ -3,15 +3,11 @@ cask :v1 => 'grooveshark' do
   sha256 :no_check
 
   url 'http://adops-fio.grooveshark.com/desktop-app/downloads/grooveshark.zip'
+  name 'Grooveshark'
   homepage 'http://www.grooveshark.com'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Grooveshark.app'
 
-  # todo: transitional, replace #{self.name...} with #{token}
-  caveats <<-EOS.undent
-    #{self.name.sub(/^KlassPrefix/,'').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').downcase} requires Adobe Flash, available via
-
-      brew cask install flash
-  EOS
+  depends_on :cask => 'flash'
 end

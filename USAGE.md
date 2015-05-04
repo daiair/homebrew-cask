@@ -84,7 +84,6 @@ more information.
 * `doctor` -- checks for configuration issues
 * `cleanup` -- cleans up cached downloads (with `--outdated`, only cleans old downloads)
 * `home` -- opens the homepage of the given Cask; or with no arguments, the homebrew-cask project page
-* `alfred` -- modifies Alfred's search scope to include installed Casks
 * `update` -- a synonym for `brew update`
 * `zap` -- try to remove *all* files associated with a Cask (including resources which may be shared with other applications)
 
@@ -181,7 +180,8 @@ $ brew cask install caskroom/fonts/font-symbola
 You can also modify the default installation locations used when issuing `brew cask install`:
 
 * `--caskroom=/my/path` determines where the actual applications will be located.
-Default is `/opt/homebrew-cask/Caskroom`
+Should be handled with care — setting it outside `/opt` or your home directory might mess up your system.
+Default is `/opt/homebrew-cask/Caskroom`.
 * `--appdir=/my/path` changes the path where the symlinks to the applications (above)
 will be generated. This is commonly used to create the links in the _root_ Applications directory
 instead of the _home_ Applications directory by specifying `--appdir=/Applications`. Default is `~/Applications`.
@@ -189,8 +189,6 @@ instead of the _home_ Applications directory by specifying `--appdir=/Applicatio
 Default is `~/Library/PreferencePanes`
 * `--qlplugindir=/my/path` changes the path for Quicklook Plugin symlinks.
 Default is `~/Library/QuickLook`
-* `--widgetdir=/my/path` changes the path for Dashboard Widget symlinks.
-Default is `~/Library/Widgets`
 * `--fontdir=/my/path` changes the path for Fonts symlinks.
 Default is `~/Library/Fonts`
 * `--binarydir=/my/path` changes the path for binary symlinks.
@@ -252,16 +250,3 @@ The last three forms are intended for users who wish to maintain private Casks.
 
 You can add Casks to your existing (or new) Taps: just create a directory named
 `Casks` inside your Tap, put your Cask files there, and everything will just work.
-
-## Alfred Integration
-
-Many users combine Homebrew-cask with [Alfred 2](http://www.alfredapp.com/) to great effect. Just add
-the Cask staging area to Alfred's "search scope" by either
-
- * running `brew cask alfred link`, or
- * manually adding `/opt/homebrew-cask/Caskroom` via Alfred's preferences GUI
-
-Applications will then become available in Alfred immediately after a `brew
-cask install`. Your fingertips will thank you.
-
-Oh, and you can `brew cask install alfred` too! Not bad, eh?

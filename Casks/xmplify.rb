@@ -3,8 +3,9 @@ cask :v1 => 'xmplify' do
   sha256 :no_check
 
   url 'http://xmplifyapp.com/releases/Xmplify.dmg'
+  name 'Xmplify'
   homepage 'http://xmplifyapp.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Xmplify.app'
 

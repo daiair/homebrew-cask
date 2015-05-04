@@ -1,10 +1,11 @@
 cask :v1 => 'moneyguru' do
-  version '2.7.2'
-  sha256 '9fd0f1c57a4a0ccc1dae75cf1408aa9f25c5219eb58b294933bcea3b82705d59'
+  version '2.8.2'
+  sha256 '65b8df411330593462fc0eb8377115cc0709c0e499af1876fda0baf2a0bc03f0'
 
   url "http://download.hardcoded.net/moneyguru_osx_#{version.gsub('.', '_')}.dmg"
+  name 'moneyGuru'
   homepage 'http://www.hardcoded.net/moneyguru/'
-  license :unknown    # todo: improve this machine-generated value
+  license :bsd
 
   app 'moneyGuru.app'
 end

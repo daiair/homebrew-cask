@@ -5,6 +5,7 @@ cask :v1 => 'kaleidoscope' do
   url "http://cdn.kaleidoscopeapp.com/releases/Kaleidoscope-#{version}.zip"
   appcast 'https://updates.blackpixel.com/updates?app=ks',
           :sha256 => '80eafc0b115e6f9ad4ec0cdec87809f21a3fc7ff1c540722f74d86dad64da158'
+  name 'Kaleidoscope'
   homepage 'http://www.kaleidoscopeapp.com/'
   license :commercial
 
@@ -18,4 +19,13 @@ cask :v1 => 'kaleidoscope' do
   caveats do
     files_in_usr_local
   end
+
+  zap :delete => [
+                  '~/Library/Application Support/Kaleidoscope',
+                  '~/Library/Caches/com.blackpixel.kaleidoscope',
+                  '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.blackpixel.kaleidoscope',
+                  '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.blackpixel.kaleidoscope/queued_reports',
+                  '~/Library/Preferences/com.blackpixel.kaleidoscope.plist',
+                  '~/Library/Saved Application State/com.blackpixel.kaleidoscope.savedState',
+                 ]
 end

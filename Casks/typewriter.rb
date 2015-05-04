@@ -3,8 +3,9 @@ cask :v1 => 'typewriter' do
   sha256 :no_check
 
   url 'http://llllll.li/typewriter/download/Typewriter.zip'
+  name 'Typewriter'
   homepage 'http://llllll.li/typewriter'
-  license :unknown    # todo: improve this machine-generated value
+  license :mit
 
   app 'Typewriter.app'
 end

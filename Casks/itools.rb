@@ -1,10 +1,12 @@
 cask :v1 => 'itools' do
-  version '2.4.3'
-  sha256 '4d17f188c710649a952eb66b75989fe739e848fc98db1970bf98fca0ae3f8cf9'
+  version '2.5.0'
+  sha256 '196ad7aec8732ecdc66b0281fe2065eb5abe2ec97fe260f5de4b144a2bd721ab'
 
+  # itools.hk is the official download host per the vendor homepage
   url "http://dl2.itools.hk/dl/iTools_#{version}.dmg"
-  homepage 'http://pro.itools.cn/mac'
-  license :unknown    # todo: improve this machine-generated value
+  name 'iTools'
+  homepage 'http://pro.itools.cn/mac/english'
+  license :gratis
 
   app 'iTools.app'
 end

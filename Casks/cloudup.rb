@@ -2,9 +2,10 @@ cask :v1 => 'cloudup' do
   version :latest
   sha256 :no_check
 
-  url 'https://zip.cloudup.com/f41gmwzoDkioEVevEkBW'
+  url 'https://updates.cloudup.com/update?os=osx&app=Cloudup&format=zip&channel=release'
+  name 'Cloudup'
   homepage 'https://cloudup.com/download'
-  license :unknown    # todo: improve this machine-generated value
+  license :freemium
 
   app 'Cloudup.app'
 end

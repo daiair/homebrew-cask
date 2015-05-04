@@ -3,8 +3,9 @@ cask :v1 => 'adwaremedic' do
   sha256 :no_check
 
   url 'http://www.adwaremedic.com/AdwareMedic.dmg'
+  name 'AdwareMedic'
   homepage 'http://www.adwaremedic.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
 
   app 'AdwareMedic.app'
 end

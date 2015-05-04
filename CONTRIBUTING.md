@@ -9,6 +9,7 @@ all pretty happy about this.  Here's how to get started:
  * [Finding a Home For Your Cask](#finding-a-home-for-your-cask)
  * [Submitting Your Changes](#submitting-your-changes)
  * [Cleaning up](#cleaning-up)
+ * [Reporting Bugs](README.md#reporting-bugs)
 
 
 ## Getting Set Up To Contribute
@@ -40,7 +41,7 @@ cask :v1 => 'alfred' do
   url 'https://cachefly.alfredapp.com/Alfred_2.3_264.zip'
   name 'Alfred'
   homepage 'http://www.alfredapp.com/'
-  license :commercial
+  license :freemium
 
   app 'Alfred 2.app'
   app 'Alfred 2.app/Contents/Preferences/Alfred Preferences.app'
@@ -66,7 +67,7 @@ cask :v1 => 'unity' do
 end
 ```
 
-And here is one for `Firefox.app`. Note that it has an unversioned download (the download `url` does not contain the version number, unlike the example above). It also suppresses the checksum with `sha256 :no_check` (necessary since the checksum will change when a new version is available). This combination of `version :latest` and `sha256 :no_check` is currently the preferred mechanism when an unversioned download URL is available:
+And here is one for `Firefox.app`. Note that it has an unversioned download (the download `url` does not contain the version number, unlike the example above). It also suppresses the checksum with `sha256 :no_check` (necessary since the checksum will change when a new distribution is made available). This combination of `version :latest` and `sha256 :no_check` is currently the preferred mechanism when an unversioned download URL is available:
 
 ```ruby
 cask :v1 => 'firefox' do
@@ -137,7 +138,7 @@ Fill in the following stanzas for your Cask:
 | name               | value       |
 | ------------------ | ----------- |
 | `version`          | application version; give the value `:latest` if an unversioned download is available
-| `sha256`           | SHA-256 checksum of the file downloaded from `url`, calculated by the command `shasum -a 256 <file>`.  Can be suppressed for unversioned downloads by using the special value `:no_check`. (see also [Checksum Stanza Details](doc/CASK_LANGUAGE_REFERENCE.md#checksum-stanza-details))
+| `sha256`           | SHA-256 checksum of the file downloaded from `url`, calculated by the command `shasum -a 256 <file>`.  Can be suppressed by using the special value `:no_check`. (see also [Checksum Stanza Details](doc/CASK_LANGUAGE_REFERENCE.md#checksum-stanza-details))
 | `url`              | URL to the `.dmg`/`.zip`/`.tgz` file that contains the application (see also [URL Stanza Details](doc/CASK_LANGUAGE_REFERENCE.md#url-stanza-details))
 | `name`             | the full and proper name defined by the vendor, and any useful alternate names (see also [Name Stanza Details](doc/CASK_LANGUAGE_REFERENCE.md#name-stanza-details))
 | `homepage`         | application homepage; used for the `brew cask home` command
@@ -159,7 +160,6 @@ Additional stanzas you might need for special use-cases:
 | `colorpicker`          | relative path to a ColorPicker plugin that should be linked into the `~/Library/ColorPickers` folder on installation
 | `qlplugin`             | relative path to a QuickLook plugin that should be linked into the `~/Library/QuickLook` folder on installation
 | `font`                 | relative path to a font that should be linked into the `~/Library/Fonts` folder on installation
-| `widget`               | relative path to a widget that should be linked into the `~/Library/Widgets` folder on installation (ALPHA: DOES NOT WORK YET)
 | `service`              | relative path to a service that should be linked into the `~/Library/Services` folder on installation
 | `binary`               | relative path to a binary that should be linked into the `/usr/local/bin` folder on installation
 | `input_method`         | relative path to a input method that should be linked into the `~/Library/Input Methods` folder on installation
@@ -176,13 +176,14 @@ Even more special-use stanzas are listed at [Optional Stanzas](doc/CASK_LANGUAGE
 SourceForge projects are a common way to distribute binaries, but they
 provide many different styles of URLs to get to the goods.
 
-We prefer URLs of this format:
+We prefer URLs of this format, if the app is Mac-exclusive
+(otherwise a command-line download defaults to the Windows version):
 
 ```
 http://sourceforge.net/projects/$PROJECTNAME/files/latest/download
 ```
 
-This lets the project maintainers choose the best URL for download.
+This lets SourceForge pick the best mirror for download.
 
 If the "latest" URL does not point to a valid file for a Mac app, then we
 fall back to this format:
@@ -229,7 +230,7 @@ If possible, avoid creating tokens which differ only by the placement of
 hyphens.
 
 To generate a token manually, or to learn about exceptions for unusual cases,
-see [CASK_TOKEN_REFERENCE.md](doc/CASK_TOKEN_REFERENCE.md).
+see [cask_token_reference.md](doc/cask_token_reference.md).
 
 
 ### Archives With Subfolders
@@ -248,11 +249,26 @@ Example:
 	app 'TexmakerMacosxLion/texmaker.app'
 	```
 
-### Indenting
+### Style guide
 
 All Casks and code in the homebrew-cask project should be indented using two
 spaces (never tabs).
 
+If relevant, you may also use string manipulations to improve the maintainability of your Cask. Here's an example from `Lynkeos.app`:
+
+```ruby
+cask :v1 => 'lynkeos' do
+  version '2.10'
+  sha256 'bd27055c51575555a1c8fe546cf057c57c0e45ea5d252510847277734dc550a4'
+
+  url "http://downloads.sourceforge.net/project/lynkeos/lynkeos/#{version}/Lynkeos-App-#{version.gsub('.', '-')}.zip"
+  name 'Lynkeos'
+  homepage 'http://lynkeos.sourceforge.net/'
+  license :gpl
+
+  app "Lynkeos-App-#{version.gsub('.', '-')}/Lynkeos.app"
+end
+```
 
 ## Testing Your New Cask
 
@@ -297,10 +313,11 @@ Before submitting a trial, please make sure it can be made into a full working v
 without the need to be redownloaded. If an App provides a trial but the only way to buy the full version
 is via the Mac App Store, it does not currently belong in any of the official repos.
 
-### Unofficial Builds
+### Unofficial, Vendorless, or Walled Builds
 
-When an App developer does not offer a binary download, please submit the
-Cask to [caskroom/homebrew-unofficial](http://github.com/caskroom/homebrew-unofficial).
+When an App developer does not offer a binary download, the binary doesn't have an official vendor,
+or the download URL is both behind a registration wall and served from an unofficial host,
+please submit the Cask to [caskroom/homebrew-unofficial](http://github.com/caskroom/homebrew-unofficial).
 For a location to host unofficial builds, contact our sister project [alehouse](https://github.com/alehouse).
 
 ### Fonts
@@ -414,10 +431,5 @@ git checkout master
 
 Neat and tidy!
 
-
-## Working On homebrew-cask Itself
-
-If you'd like to hack on the Ruby code in the project itself, please
-see [hacking.md](doc/hacking.md).
 
 # <3 THANK YOU! <3

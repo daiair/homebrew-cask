@@ -4,8 +4,9 @@ cask :v1 => 'disk-inventory-x' do
 
   url "http://www.derlien.com/diskinventoryx/downloads/dev/DIX#{version}Universal.dmg",
     :user_agent => :fake
+  name 'Disk Inventory X'
   homepage 'http://www.derlien.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gpl
 
   app 'Disk Inventory X.app'
 end

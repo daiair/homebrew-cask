@@ -3,8 +3,9 @@ cask :v1 => 'ember' do
   sha256 :no_check
 
   url 'http://realmacsoftware.com/redirects/ember/direct'
+  name 'Ember'
   homepage 'http://realmacsoftware.com/ember'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   app 'Ember.app'
 end

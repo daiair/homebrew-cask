@@ -1,10 +1,13 @@
 cask :v1 => 'shotcut' do
-  version '14.11.01'
-  sha256 'f364c8849ed79376006209bfb0146d1449461bb3b18a1548c55b3c8fb93f00ba'
+  version '15.03.03'
+  sha256 '750c03405086560dbe8578d96947852f258420b203a9e88f9dfaa7fbe0852760'
 
-  url "https://github.com/mltframework/shotcut/releases/download/v#{version.gsub(/\.\d{2}$/, '')}/shotcut-osx-x86_64-#{version.gsub('.', '')}.dmg"
+  # github.com is the official download host per the vendor homepage
+  url "https://github.com/mltframework/shotcut/releases/download/v#{version.sub(/\.\d+$/, '')}/shotcut-osx-x86_64-#{version.gsub('.', '')}.dmg"
+  appcast 'https://github.com/mltframework/shotcut/releases.atom'
+  name 'Shotcut'
   homepage 'http://www.shotcut.org/'
-  license :oss
+  license :gpl
 
   app 'Shotcut.app'
 end

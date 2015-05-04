@@ -3,8 +3,9 @@ cask :v1 => 'sixtyforce' do
   sha256 :no_check
 
   url 'http://sixtyforce.com/download/sixtyforce.zip'
+  name 'sixtyforce'
   homepage 'http://sixtyforce.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :freemium
 
   app 'sixtyforce.app'
 end

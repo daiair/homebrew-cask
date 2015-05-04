@@ -3,8 +3,9 @@ cask :v1 => 'infinit' do
   sha256 :no_check
 
   url 'https://download.infinit.io/macosx/installer/Infinit.dmg'
+  name 'Infinit'
   homepage 'https://infinit.io/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Infinit.app'
 end

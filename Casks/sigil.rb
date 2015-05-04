@@ -1,10 +1,13 @@
 cask :v1 => 'sigil' do
-  version '0.8.2'
-  sha256 '2c8dd9f573c4549adde0778cbcc1c5535fdc68a705fd3aa470700dea678117cd'
+  version '0.8.6'
+  sha256 'b69d642d7f1126b7f7d1c542773267c1dbaa764e2ec473258ff93d3a8f385c71'
 
+  # github.com is the official download host per the vendor homepage
   url "https://github.com/user-none/Sigil/releases/download/#{version}/Sigil-#{version}-Mac-Package.dmg"
-  homepage 'http://code.google.com/p/sigil/'
-  license :oss
+  appcast 'https://github.com/user-none/Sigil/releases.atom'
+  name 'Sigil'
+  homepage 'http://sigil-ebook.com/'
+  license :gpl
 
   app 'Sigil.app'
 end

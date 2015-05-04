@@ -1,10 +1,13 @@
 cask :v1 => 'darktable' do
-  version '1.6.0'
-  sha256 'f45fda7a7ac9648f26687b1b51f258493c73da592248ab2f0fa4b9bc79f0f3b4'
+  version '1.6.6'
+  sha256 'bce9a792ee362c47769839ec3e49973c07663dbdf6533ef5a987c93301358607'
 
+  # github.com is the official download host per the vendor homepage
   url "https://github.com/darktable-org/darktable/releases/download/release-#{version}/darktable-#{version}.dmg"
+  appcast 'https://github.com/darktable-org/darktable/releases.atom'
+  name 'darktable'
   homepage 'http://www.darktable.org/'
-  license :oss
+  license :gpl
 
   app 'darktable.app'
 end

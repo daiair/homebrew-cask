@@ -118,41 +118,44 @@ We recommend the following:
 	/<path>/<to>/<private>/<repo>/developer/bin/production_brew_cask
 	```
 
-#### Forcing a Ruby interpreter
+### Forcing a Ruby interpreter
 
 You can force a specific version of the Ruby interpreter, and/or an
 alternate version of the `brew-cask` subcommand, by invoking `brew cask`
 with fully-qualified paths, like this:
 
 ```bash
-$ HOMEBREW_BREW_FILE=/usr/local/bin/brew /System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby /usr/local/Library/brew.rb /usr/local/bin/brew-cask.rb help
+$ /System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby /usr/local/Library/Taps/caskroom/homebrew-cask/lib/brew-cask-cmd.rb help
 ```
 
-#### Forcing a Specific Homebrew-cask Subcommand
+### Forcing a Specific Homebrew-cask Subcommand
 
 If you are developing a subcommand, you can force `brew cask` to dispatch a
 specific file by giving a fully-qualified path to the file containing the
 subcommand, like this:
 
 ```bash
-$ brew cask /usr/local/Cellar/brew-cask/0.37.0/rubylib/cask/cli/info.rb google-chrome
+$ brew cask /usr/local/Cellar/brew-cask/0.37.0/rubylib/hbc/cli/info.rb google-chrome
 ```
 
 This form can also be combined with a specific Ruby interpreter as above.
 
+### Forcing a Specific OS X Release
+
+The environment variable `$MACOS_RELEASE` can be overridden at the command
+line for test purposes:
+
+```bash
+$ MACOS_RELEASE=10.9 brew cask info <cask>
+```
+
+The environment variable `$MACOS_RELEASE_WITH_PATCHLEVEL` is also available,
+though not consulted directly.  Use `$MACOS_RELEASE` for testing.
+
 ### Target Ruby Versions
 
-Homebrew-cask is `require`d from within the Ruby environment of the parent
-Homebrew command (`brew`).
-
-Therefore, Homebrew-cask uses whichever Ruby interpreter chosen by Homebrew.
-This is generally an Apple-supplied Ruby, though it may change according to
-OS version.  At the time of writing, Homebrew targets Ruby 2.0 on OS X
-Mavericks (10.9) and Yosemite (10.10), and Ruby 1.8.7 on older OS revisions.
-
-So, our code must currently maintain compatibility across Ruby 1.8.7 and
-2.0.  The automated testing provided by Travis-CI will ensure that any pull
-request will be tested under both versions.
+Homebrew-cask requires a Ruby interpreter version 2.0 or above.  This
+is the default system Ruby on Mavericks (10.9) and Yosemite (10.10).
 
 ### Submitting Your Changes
 
@@ -168,9 +171,27 @@ pull request more quickly.
 
 #### Mind the test suite!
 
-If you're making changes - please write some tests for them! Also be sure to
-run the whole test suite using `rake test` before submitting (if you forget,
-Travis-CI will do that for you and embarrass you in front of all your friends). :)
+If you're making changes - please write some tests for them! Install
+dependencies and run the whole test suite with:
+
+```bash
+bundle
+rake test
+```
+
+Be sure to run the test suite before submitting. If you forget, Travis-CI will do that for you and embarrass you in front of all your friends. :)
+
+You may also use a set of environment variables to increase verbosity:
+
+ - `TESTOPTS`, `TEST` etc. for the old [minitest suites](http://www.ruby-doc.org/stdlib-2.0.0/libdoc/rake/rdoc/Rake/TestTask.html)
+ - `SPEC_OPTS`, `SPEC` etc. for [rspec suites](http://apidock.com/rspec/Spec/Rake/SpecTask)
+ - `VERBOSE_TESTS` to see the standard output from the actual code = ignore the `shutup` helper
+
+Example of a very verbose output:
+
+```shell
+TESTOPTS='-v' SPEC_OPTS='-fd' VERBOSE_TESTS=1 rake test
+```
 
 #### External Commands
 

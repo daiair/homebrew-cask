@@ -3,8 +3,9 @@ cask :v1 => 'hazel' do
   sha256 :no_check
 
   url 'http://www.noodlesoft.com/Products/Hazel/download'
+  name 'Hazel'
   homepage 'http://www.noodlesoft.com/hazel.php'
-  license :unknown    # todo: improve this machine-generated value
+  license :freemium
 
   prefpane 'Hazel.prefPane'
 

@@ -3,8 +3,9 @@ cask :v1 => 'musicplayer' do
   sha256 :no_check
 
   url 'http://ufd.dk/res/MusicPlayer.app.zip'
+  name 'Music Player'
   homepage 'http://ufd.dk/musicplayer'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'MusicPlayer.app'
 end

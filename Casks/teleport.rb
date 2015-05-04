@@ -3,8 +3,9 @@ cask :v1 => 'teleport' do
   sha256 :no_check
 
   url 'http://www.abyssoft.com/software/teleport/downloads/teleport.zip'
+  name 'teleport'
   homepage 'http://www.abyssoft.com/software/teleport/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
 
-  prefpane 'teleport/teleport.prefPane'
+  app 'teleport/teleport.app'
 end

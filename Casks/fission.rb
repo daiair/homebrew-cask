@@ -3,8 +3,9 @@ cask :v1 => 'fission' do
   sha256 :no_check
 
   url 'http://neutral.rogueamoeba.com/mirror/files/Fission.zip'
+  name 'Fission'
   homepage 'http://rogueamoeba.com/fission/'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   app 'Fission.app'
 end

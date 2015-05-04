@@ -4,8 +4,9 @@ cask :v1 => 'musictube' do
 
   url 'http://flavio.tordini.org/files/musictube/musictube.dmg'
   appcast 'http://flavio.tordini.org/musictube-ws/appcast.xml'
+  name 'Musictube'
   homepage 'http://flavio.tordini.org/musictube'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Musictube.app'
 end

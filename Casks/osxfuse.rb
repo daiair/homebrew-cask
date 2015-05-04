@@ -1,10 +1,12 @@
 cask :v1 => 'osxfuse' do
-  version '2.7.3'
-  sha256 '88d0594e46191aeafa259535398d25c4ccfa03c178e10d925a69e4dcb6293fa2'
+  version '2.7.5'
+  sha256 '9be5cc9c44c2211aacea6a35aea5d47fea82599e981f051f318201a637b43f72'
 
-  url "https://downloads.sourceforge.net/project/osxfuse/osxfuse-#{version}/osxfuse-#{version}.dmg"
+  # sourceforge.net is the official download host per the vendor homepage
+  url "http://downloads.sourceforge.net/project/osxfuse/osxfuse-#{version}/osxfuse-#{version}.dmg"
+  name 'OSXFUSE'
   homepage 'https://osxfuse.github.io/'
-  license :oss
+  license :bsd
 
   pkg "Install OSXFUSE #{version[0..-3]}.pkg"
 

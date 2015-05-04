@@ -3,8 +3,9 @@ cask :v1 => 'google-chrome' do
   sha256 :no_check
 
   url 'https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+  name 'Google Chrome'
   homepage 'https://www.google.com/chrome/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
   tags :vendor => 'Google'
 
   app 'Google Chrome.app'

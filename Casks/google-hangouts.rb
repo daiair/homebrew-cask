@@ -3,8 +3,10 @@ cask :v1 => 'google-hangouts' do
   sha256 :no_check
 
   url 'https://dl.google.com/googletalk/googletalkplugin/GoogleVoiceAndVideoSetup.dmg'
+  name 'Google Hangouts'
   homepage 'https://www.google.com/tools/dlpage/hangoutplugin'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
+  tags :vendor => 'Google'
 
   pkg 'Google Voice and Video.pkg'
 

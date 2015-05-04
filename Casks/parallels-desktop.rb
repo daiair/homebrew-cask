@@ -1,8 +1,9 @@
 cask :v1 => 'parallels-desktop' do
-  version '10.1.1-28614'
-  sha256 'd39780b42640c5de6198fb7434e24ac1cc983cc13b131c73cdba775964ec4e0d'
+  version '10.2.0-28956'
+  sha256 'cedb9d0c3a6ea02e9293422ac55e536017ee70891f6ff6a84b85589d8d3cfd51'
 
-  url "http://download.parallels.com/desktop/v10/updates/#{version.gsub(/-.*$/, '')}/ParallelsDesktop-#{version}.dmg"
+  url "http://download.parallels.com/desktop/v#{version[/^\w+/]}/#{version.sub(/-.*$/, '')}/ParallelsDesktop-#{version}.dmg"
+  name 'Parallels Desktop'
   homepage 'http://www.parallels.com/products/desktop/'
   license :commercial
 
@@ -10,7 +11,7 @@ cask :v1 => 'parallels-desktop' do
 
   postflight do
     # Set the file to visible, since it was hidden in the dmg
-    system '/usr/bin/SetFile', '-a', 'v', staged_path.join("Parallels Desktop.app")
+    system '/usr/bin/SetFile', '-a', 'v', staged_path.join('Parallels Desktop.app')
   end
 
   uninstall :delete => [
@@ -29,10 +30,4 @@ cask :v1 => 'parallels-desktop' do
                          '~/Library/Preferences/com.parallels.Parallels Desktop.plist',
                          '~/Library/Preferences/com.parallels.Parallels.plist',
                         ]
-
-  caveats <<-EOS.undent
-    The first time you run Parallels Desktop, you will need to enter your
-    password in order to complete the installation.
-
-    EOS
 end

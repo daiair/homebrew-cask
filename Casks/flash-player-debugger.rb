@@ -1,10 +1,13 @@
 cask :v1 => 'flash-player-debugger' do
-  version '14.0.0.176'
-  sha256 '4ea23e909aa54c130de0d7a6453409207d303523cce15c4621ad4a55e0681fcf'
+  version '17.0.0.169'
+  sha256 '069050cf64fe4f3efb54786be24a58008b0930333d66cea1033a3d591b85b07b'
 
+  # macromedia.com is the official download host per the vendor homepage
   url "https://fpdownload.macromedia.com/pub/flashplayer/updaters/#{version.to_i}/flashplayer_#{version.to_i}_sa_debug.dmg"
+  name 'Adobe Flash Player Debugger'
   homepage 'https://www.adobe.com/support/flashplayer/downloads.html'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
+  tags :vendor => 'Adobe'
 
   # Renamed to avoid conflict with flash-player.
   app 'Flash Player.app', :target => 'Flash Player Debugger.app'

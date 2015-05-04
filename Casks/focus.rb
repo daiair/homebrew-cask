@@ -4,8 +4,9 @@ cask :v1 => 'focus' do
 
   url 'http://www.heyfocus.com/releases/Focus-latest.zip'
   appcast 'http://www.heyfocus.com/appcast.xml'
+  name 'Focus'
   homepage 'http://www.heyfocus.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Focus.app'
 end

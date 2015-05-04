@@ -3,8 +3,10 @@ cask :v1 => 'zooom' do
   sha256 :no_check
 
   url 'http://software.coderage-software.com/zooom/Zooom_Latest.dmg'
+  name 'Zooom'
+  name 'Zooom/2'
   homepage 'http://coderage-software.com/zooom'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   pkg 'Zooom2.pkg'
 

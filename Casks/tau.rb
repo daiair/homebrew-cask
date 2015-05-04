@@ -3,8 +3,9 @@ cask :v1 => 'tau' do
   sha256 :no_check
 
   url 'http://tau.uoregon.edu/tau.dmg'
+  name 'TAU'
   homepage 'http://tau.uoregon.edu/'
-  license :unknown    # todo: improve this machine-generated value
+  license :oss
 
   suite 'TAU'
 end

@@ -3,8 +3,9 @@ cask :v1 => 'jitouch' do
   sha256 :no_check
 
   url 'http://www.jitouch.com/jitouch_yosemite.zip'
+  name 'jitouch'
   homepage 'http://www.jitouch.com'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   prefpane 'jitouch/Jitouch.prefPane'
 

@@ -3,19 +3,16 @@ cask :v1 => 'craftstudio' do
   sha256 :no_check
 
   url 'http://craftstud.io/files/OSX/CraftStudio.pkg'
+  name 'CraftStudio'
   homepage 'http://craftstud.io'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   pkg 'CraftStudio.pkg'
 
   uninstall :quit => 'com.sparklinlabs.CraftStudioLauncher',
             :pkgutil => 'com.sparklinlabs.CraftStudioLauncher'
+
   zap       :delete => '~/Library/CraftStudio'
 
-  # todo: transitional, replace #{self.name...} with #{token}
-  caveats <<-EOS.undent
-    #{self.name.sub(/^KlassPrefix/,'').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').gsub(/([a-zA-Z\d])([A-Z])/,'\1-\2').downcase} requires mono-mre, available via
-
-      brew cask install mono-mre
-  EOS
+  depends_on :cask => 'mono-mre'
 end

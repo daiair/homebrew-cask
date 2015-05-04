@@ -1,10 +1,11 @@
 cask :v1 => 'facter' do
-  version '2.3.0'
-  sha256 '35c88c2af26e2c59364604788cd5ff4a1b3d8171e2690e65e38156278e32d6d1'
+  version '2.4.1'
+  sha256 'd1a5bd1dce79878096f089facecae7e7d4114ca2253db4d4e93345b96705a25d'
 
   url "https://downloads.puppetlabs.com/mac/facter-#{version}.dmg"
+  name 'Facter'
   homepage 'https://puppetlabs.com/facter'
-  license :unknown    # todo: improve this machine-generated value
+  license :apache
 
   pkg "facter-#{version}.pkg"
 

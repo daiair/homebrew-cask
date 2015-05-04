@@ -1,10 +1,14 @@
-#!/usr/bin/env ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
 #
 # generate_cask_token
 #
 # todo:
 #
+# remove Ruby 2.0 dependency and change shebang line
+#
 # detect Cask files which differ only by the placement of hyphens.
+#
+# merge entirely into "brew cask create" command
 #
 
 ###
@@ -26,6 +30,7 @@ end
 
 EXPANDED_SYMBOLS = {
                     '+' => 'plus',
+                    '@' => 'at',
                    }
 
 CASK_FILE_EXTENSION = '.rb'
@@ -71,8 +76,7 @@ REMOVE_TRAILING_PATS = [
 
                         # generic terms
                         %r{\bapp}i,
-                        # idea, but never discussed
-                        # %r{\blauncher}i,
+                        %r{\b(?:quick[\s-]*)?launcher}i,
 
                         # "mac", "for mac", "for OS X".
                         %r{\b(?:for)?[\s-]*mac(?:intosh)?}i,

@@ -1,10 +1,13 @@
 cask :v1 => 'flash' do
-  version '16.0.0.235'
-  sha256 'd47bdc510f35e35ecf5260e35f6c86a4750f95b8505841bc10e1b6a1af82d346'
+  version '17.0.0.169'
+  sha256 'fc566ceb1eff75790c6d5b5755a926c25cb1e354ba29ead48903f378c2be661f'
 
+  # macromedia.com is the official download host per the vendor homepage
   url "http://fpdownload.macromedia.com/get/flashplayer/current/licensing/mac/install_flash_player_#{version.to_i}_osx_pkg.dmg"
+  name 'Adobe Flash Player'
   homepage 'https://www.adobe.com/products/flashplayer/distribution3.html'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
+  tags :vendor => 'Adobe'
 
   pkg 'Install Adobe Flash Player.pkg'
 

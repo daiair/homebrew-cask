@@ -3,8 +3,9 @@ cask :v1 => 'ibabel' do
   sha256 :no_check
 
   url 'http://macinchem.org/ibabel/ibabel3_files/iBabel.zip'
+  name 'iBabel'
   homepage 'http://www.macinchem.org/ibabel/ibabel3.php'
-  license :unknown    # todo: improve this machine-generated value
+  license :gpl
 
   app 'iBabel.app'
 end

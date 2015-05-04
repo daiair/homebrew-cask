@@ -4,8 +4,9 @@ cask :v1 => 'voicemac' do
 
   url 'http://download.mrgeckosmedia.com/VoiceMac.zip'
   appcast 'https://mrgeckosmedia.com/applications/appcast/VoiceMac'
+  name 'VoiceMac'
   homepage 'https://mrgeckosmedia.com/applications/info/VoiceMac'
-  license :unknown    # todo: improve this machine-generated value
+  license :isc
 
   app 'VoiceMac/VoiceMac.app'
   postflight do

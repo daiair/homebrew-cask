@@ -1,10 +1,12 @@
 cask :v1 => 'itsycal' do
-  version '0.8.12'
-  sha256 '1b138d7ddce1ac725c7fd0146225dd50f1bad90b62cf727fe89c636c4281e697'
+  version '0.9.2'
+  sha256 '0019f05fbed122e01eed73d64b70e8b1ba03ce9185c1ce9ef49731bdb418ae0a'
 
+  # amazonaws.com is the official download host per the vendor homepage
   url "https://s3.amazonaws.com/itsycal/Itsycal-#{version}.zip"
+  name 'Itsycal'
   homepage 'http://www.mowglii.com/itsycal/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gratis
 
-  app "Itsycal.app"
+  app 'Itsycal.app'
 end

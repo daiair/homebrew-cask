@@ -5,8 +5,9 @@ cask :v1 => 'max' do
   url "http://files.sbooth.org/Max-#{version}.tar.bz2"
   appcast 'http://sbooth.org/Max/appcast.xml',
           :sha256 => 'd390d6c0b308d5957faf57a05b90960ab602101adb9b80bd61f5948663d6e892'
+  name 'Max'
   homepage 'http://sbooth.org/Max/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app "Max-#{version}/Max.app"
 end

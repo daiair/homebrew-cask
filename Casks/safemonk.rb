@@ -4,8 +4,9 @@ cask :v1 => 'safemonk' do
 
   url 'https://www.safemonk.com/downloads/osx'
   appcast 'https://www.safemonk.com:/data/client/osx/appcast.xml'
+  name 'SafeMonk'
   homepage 'https://www.safemonk.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'SafeMonk.app'
 end

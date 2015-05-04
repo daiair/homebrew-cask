@@ -4,8 +4,18 @@ cask :v1 => 'sketch' do
 
   url 'http://bohemiancoding.com/static/download/sketch.zip'
   appcast 'http://www.bohemiancoding.com/sketch/appcast.xml'
+  name 'Sketch'
   homepage 'http://www.bohemiancoding.com/sketch/'
-  license :unknown    # todo: improve this machine-generated value
+  license :commercial
 
   app 'Sketch.app'
+
+  zap :delete => [
+                  '~/Library/Application Support/com.bohemiancoding.sketch3',
+                  '~/Library/Caches/com.bohemiancoding.sketch3',
+                  '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.bohemiancoding.sketch3',
+                  '~/Library/Logs/com.bohemiancoding.sketch3',
+                  '~/Library/Preferences/com.bohemiancoding.sketch3.LSSharedFileList.plist',
+                  '~/Library/Preferences/com.bohemiancoding.sketch3.plist',
+                 ]
 end

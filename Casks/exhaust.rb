@@ -3,9 +3,10 @@ cask :v1 => 'exhaust' do
   sha256 :no_check
 
   url 'http://download.mrgeckosmedia.com/Exhaust.zip'
+  name 'Exhaust'
   appcast 'http://mrgeckosmedia.com/applications/appcast/Exhaust'
   homepage 'https://mrgeckosmedia.com/applications/info/Exhaust'
-  license :unknown    # todo: improve this machine-generated value
+  license :oss
 
   app 'Exhaust/Exhaust.app'
 end

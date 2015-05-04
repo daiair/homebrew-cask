@@ -4,8 +4,9 @@ cask :v1 => 'cloudpull' do
 
   url 'http://downloads.goldenhillsoftware.com/cloudpull/CloudPull.zip'
   appcast 'https://secure.goldenhillsoftware.com/updates/cloudpull/appcast.xml'
+  name 'CloudPull'
   homepage 'http://www.goldenhillsoftware.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :freemium
 
   app 'CloudPull.app'
 end

@@ -1,10 +1,10 @@
 cask :v1 => 'todotxt' do
-  version '1.2.6'
-  sha256 '65cc45d5a341010e4c9c6d4705757e909a30bec7e48c44cee399367e641dede5'
+  version '1.5.0'
+  sha256 'a1ca515ba0f521e7a4eab8da5db684323fe655621d7dc68f77b837a94c47528a'
 
   url "https://github.com/mjdescy/TodoTxtMac/releases/download/#{version}/TodoTxtMac.app.zip"
-  # todo enable name
-  # name 'TodoTxtMac'
+  appcast 'https://github.com/mjdescy/TodoTxtMac/releases.atom'
+  name 'TodoTxtMac'
   homepage 'https://mjdescy.github.io/TodoTxtMac/'
   license :mit
 

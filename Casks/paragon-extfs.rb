@@ -3,8 +3,9 @@ cask :v1 => 'paragon-extfs' do
   sha256 :no_check
 
   url 'http://dl.paragon-software.com/demo/extmac_trial_u.dmg'
+  name 'Paragon ExtFS'
   homepage 'http://www.paragon-software.com/home/extfs-mac/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   pkg 'FSInstaller.app/Contents/Resources/Paragon ExtFS for Mac OS X.pkg'
 

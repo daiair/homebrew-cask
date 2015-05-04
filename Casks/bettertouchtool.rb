@@ -1,9 +1,9 @@
 cask :v1 => 'bettertouchtool' do
 
-  if MacOS.version <= :snow_leopard
+  if MacOS.release <= :snow_leopard
     version '0.939'
     sha256 'fad5e9d36259c379bdb33188cf15d179fd9ff73023035c98f5734e7e3e13bb75'
-    url "http://bettertouchtool.net/bt#{version}.zip"
+    url "http://bettertouchtool.net/btt#{version}.zip"
   else
     version :latest
     sha256 :no_check
@@ -11,8 +11,9 @@ cask :v1 => 'bettertouchtool' do
   end
 
   appcast 'http://appcast.boastr.net'
+  name 'BetterTouchTool'
   homepage 'http://bettertouchtool.net/'
-  license :commercial
+  license :gratis
 
   app 'BetterTouchTool.app'
 

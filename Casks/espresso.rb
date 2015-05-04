@@ -3,8 +3,9 @@ cask :v1 => 'espresso' do
   sha256 :no_check
 
   url 'https://macrabbit.com/espresso/get/'
+  name 'Espresso'
   homepage 'http://macrabbit.com/espresso/'
-  license :unknown    # todo: improve this machine-generated value
+  license :freemium
 
   app 'Espresso.app'
 end

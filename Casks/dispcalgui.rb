@@ -3,8 +3,9 @@ cask :v1 => 'dispcalgui' do
   sha256 :no_check
 
   url 'http://dispcalgui.hoech.net/download/dispcalGUI.dmg'
+  name 'dispcalGUI'
   homepage 'http://dispcalgui.hoech.net'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'dispcalGUI.app'
 end

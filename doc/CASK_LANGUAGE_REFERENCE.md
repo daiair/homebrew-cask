@@ -44,7 +44,7 @@ cask :v1 => 'alfred' do
   url 'https://cachefly.alfredapp.com/Alfred_2.3_264.zip'
   name 'Alfred'
   homepage 'http://www.alfredapp.com/'
-  license :commercial
+  license :freemium
 
   app 'Alfred 2.app'
   app 'Alfred 2.app/Contents/Preferences/Alfred Preferences.app'
@@ -74,7 +74,7 @@ Each of the following stanzas is required for every Cask.
 | name               | multiple occurrences allowed? | value       |
 | ------------------ |------------------------------ | ----------- |
 | `version`          | no                            | application version; give value of `:latest`  if versioned downloads are not offered
-| `sha256`           | no                            | SHA-256 checksum of the file downloaded from `url`, calculated by the command `shasum -a 256 <file>`.  Can be suppressed for unversioned downloads by using the special value `:no_check`. (see also [Checksum Stanza Details](#checksum-stanza-details))
+| `sha256`           | no                            | SHA-256 checksum of the file downloaded from `url`, calculated by the command `shasum -a 256 <file>`.  Can be suppressed by using the special value `:no_check`. (see also [Checksum Stanza Details](#checksum-stanza-details))
 | `url`              | no                            | URL to the `.dmg`/`.zip`/`.tgz` file that contains the application (see also [URL Stanza Details](#url-stanza-details))
 | `homepage`         | no                            | application homepage; used for the `brew cask home` command
 | `license`          | no                            | a symbol identifying the license category for the application. (see also [License Stanza Details](#license-stanza-details))
@@ -97,7 +97,6 @@ Each Cask must declare one or more *artifacts* (i.e. something to install)
 | `qlplugin`         | yes                           | relative path to a QuickLook plugin that should be linked into the `~/Library/QuickLook` folder on installation
 | `screen_saver`     | yes                           | relative path to a Screen Saver that should be linked into the `~/Library/Screen Savers` folder on installation
 | `service`          | yes                           | relative path to a service that should be linked into the `~/Library/Services` folder on installation
-| `widget`           | yes                           | relative path to a widget that should be linked into the `~/Library/Widgets` folder on installation (ALPHA: DOES NOT WORK YET)
 | `suite`            | yes                           | relative path to a containing directory that should be linked into the `~/Applications` folder on installation (see also [Suite Stanza Details](#suite-stanza-details))
 | `artifact`         | yes                           | relative path to an arbitrary path that should be symlinked on installation.  This is only for unusual cases.  The `app` stanza is strongly preferred when linking `.app` bundles.
 | `installer`        | yes                           | describes an executable which must be run to complete the installation.  (see [Installer Stanza Details](#installer-stanza-details))
@@ -144,11 +143,11 @@ Tests against `MacOS.release` may use either symbolic names or version
 strings with numeric comparison operators:
 
 ```ruby
-if MacOS.release < :mavericks     # symbolic name
+if MacOS.release <= :mavericks     # symbolic name
 ```
 
 ```ruby
-if MacOS.release < '10.9'         # version string
+if MacOS.release <= '10.9'         # version string
 ```
 
 The available symbols for OS X versions are: `:tiger`, `:leopard`,
@@ -165,9 +164,9 @@ This makes it more likely that the Cask will work without alteration when
 a new OS is released.  Example (from [coconutbattery.rb](../Casks/coconutbattery.rb)):
 
 ```ruby
-if MacOS.release < :leopard
+if MacOS.release <= :tiger
   # ...
-elsif MacOS.release < :lion
+elsif MacOS.release <= :snow_leopard
   # ...
 else
   # ...
@@ -219,8 +218,8 @@ position at the end of the Cask:
 | `token`            | the Cask token
 | `version`          | the Cask version
 | `homepage`         | the Cask homepage
-| `caskroom_path`    | the containing directory for all staged Casks, typically `/opt/homebrew-cask/Caskroom`
-| `staged_path`      | the staged location for this Cask, including version number, *eg* `/opt/homebrew-cask/Caskroom/adium/1.5.10`
+| `caskroom_path`    | the containing directory for all staged Casks, typically `/opt/homebrew-cask/Caskroom` (only available with block form)
+| `staged_path`      | the staged location for this Cask, including version number, *eg* `/opt/homebrew-cask/Caskroom/adium/1.5.10` (only available with block form)
 
 Example:
 
@@ -247,6 +246,8 @@ The following methods may be called to generate standard warning messages:
 | `logout`                          | users should log out and log back in to complete installation
 | `reboot`                          | users should reboot to complete installation
 | `files_in_usr_local`              | the Cask installs files to `/usr/local`, which may confuse Homebrew
+| `discontinued`                    | software has been officially discontinued upstream
+| `free_license(web_page)`          | users may get an official license to use the software at `web_page`
 
 Example:
 
@@ -259,8 +260,23 @@ end
 
 ## Checksum Stanza Details
 
-Casks should no longer use `no_checksum` stanzas.  That form has
-been superseded by `sha256 :no_check`.
+### Calculating the SHA256
+
+The `sha256` value is usually calculated by the command
+
+```bash
+$ shasum -a 256 <file>
+```
+
+### Special Value `:no_check`
+
+The special value `sha256 :no_check` is used to turn off SHA checking
+whenever checksumming is impractical due to the upstream configuration.
+
+`version :latest` requires `sha256 :no_check`, and this pairing is common.
+However, `sha256 :no_check` does not require `version :latest`.
+
+We use a checksum whenever possible.
 
 
 ## URL Stanza Details
@@ -336,6 +352,9 @@ list of valid symbols.
 The values for `license` are categories, rather than fully-specified
 licenses.  For example, `:gpl` is a category; we do not distinguish between
 versions of the GPL.  Similarly, `:cc` and `:bsd` comprise many variants.
+They must always pertain to the license of the software itself, not the
+vendor's business model (a free app to access a paid service is still
+`:gratis`, not `:freemium`).
 
 The `license` stanza is intended as an aid to search/filtering of Casks.
 For full and complete information, the user must always rely on the vendor's
@@ -362,27 +381,28 @@ open source.  Chromium licensing is described by the generic category [`:oss`](h
 
 ### Valid Licenses
 
-| symbol           | generic category | meaning                                         | URL         |
-| ---------------- | ---------------- | ----------------------------------------------- | ----------- |
-| `:gratis`        | `:closed`        | free-to-use, closed source                      | <none>
-| `:commercial`    | `:closed`        | not free to use                                 | <none>
-| `:affero`        | `:oss`           | Affero General Public License                   | <https://gnu.org/licenses/agpl.html>
-| `:apache`        | `:oss`           | Apache Public License                           | <http://www.apache.org/licenses/>
-| `:arphic`        | `:oss`           | Arphic Public License                           | <http://www.arphic.com/tw/download/public_license.rar>
-| `:artistic`      | `:oss`           | Artistic License                                | <http://dev.perl.org/licenses/artistic.html>
-| `:bsd`           | `:oss`           | BSD License                                     | <http://www.linfo.org/bsdlicense.html>
-| `:cc`            | `:oss`           | Creative Commons License                        | <http://creativecommons.org/licenses/>
-| `:eclipse`       | `:oss`           | Eclipse Public License                          | <https://www.eclipse.org/legal/eplfaq.php>
-| `:gpl`           | `:oss`           | GNU Public License                              | <http://www.gnu.org/copyleft/gpl.html>
-| `:isc`           | `:oss`           | Internet Systems Consortium License             | <http://www.isc.org/downloads/software-support-policy/isc-license/>
-| `:lppl`          | `:oss`           | LaTeX Project Public License                    | <http://latex-project.org/lppl/>
-| `:ncsa`          | `:oss`           | University of Illinois/NCSA Open Source License | <http://otm.illinois.edu/uiuc_openSource>
-| `:mit`           | `:oss`           | MIT License                                     | <http://opensource.org/licenses/MIT>
-| `:mpl`           | `:oss`           | Mozilla Public License                          | <https://www.mozilla.org/MPL/>
-| `:ofl`           | `:oss`           | SIL Open Font License                           | <http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL>
-| `:public_domain` | `:oss`           | not copyrighted                                 | <http://creativecommons.org/publicdomain/zero/1.0/legalcode>
-| `:ubuntu_font`   | `:oss`           | Ubuntu Font License                             | <http://font.ubuntu.com/licence/>
-| `:x11`           | `:oss`           | X Consortium License                            | <http://www.xfree86.org/3.3.6/COPYRIGHT2.html>
+| symbol           | generic category | meaning                                                            | URL         |
+| ---------------- | ---------------- | ------------------------------------------------------------------ | ----------- |
+| `:gratis`        | `:closed`        | free-to-use, closed source                                         | <none>
+| `:commercial`    | `:closed`        | not free to use                                                    | <none>
+| `:freemium`      | `:closed`        | free-to-use, payment required for full or additional functionality | <http://en.wikipedia.org/wiki/Freemium>
+| `:affero`        | `:oss`           | Affero General Public License                                      | <https://gnu.org/licenses/agpl.html>
+| `:apache`        | `:oss`           | Apache Public License                                              | <http://www.apache.org/licenses/>
+| `:arphic`        | `:oss`           | Arphic Public License                                              | <http://www.arphic.com/tw/download/public_license.rar>
+| `:artistic`      | `:oss`           | Artistic License                                                   | <http://dev.perl.org/licenses/artistic.html>
+| `:bsd`           | `:oss`           | BSD License                                                        | <http://www.linfo.org/bsdlicense.html>
+| `:cc`            | `:oss`           | Creative Commons License                                           | <http://creativecommons.org/licenses/>
+| `:eclipse`       | `:oss`           | Eclipse Public License                                             | <https://www.eclipse.org/legal/eplfaq.php>
+| `:gpl`           | `:oss`           | GNU Public License                                                 | <http://www.gnu.org/copyleft/gpl.html>
+| `:isc`           | `:oss`           | Internet Systems Consortium License                                | <http://www.isc.org/downloads/software-support-policy/isc-license/>
+| `:lppl`          | `:oss`           | LaTeX Project Public License                                       | <http://latex-project.org/lppl/>
+| `:ncsa`          | `:oss`           | University of Illinois/NCSA Open Source License                    | <http://otm.illinois.edu/uiuc_openSource>
+| `:mit`           | `:oss`           | MIT License                                                        | <http://opensource.org/licenses/MIT>
+| `:mpl`           | `:oss`           | Mozilla Public License                                             | <https://www.mozilla.org/MPL/>
+| `:ofl`           | `:oss`           | SIL Open Font License                                              | <http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL>
+| `:public_domain` | `:oss`           | not copyrighted                                                    | <http://creativecommons.org/publicdomain/zero/1.0/legalcode>
+| `:ubuntu_font`   | `:oss`           | Ubuntu Font License                                                | <http://font.ubuntu.com/licence/>
+| `:x11`           | `:oss`           | X Consortium License                                               | <http://www.xfree86.org/3.3.6/COPYRIGHT2.html>
 
 
 ## Tags Stanza Details
@@ -464,17 +484,17 @@ artifact 'openman.1', :target => '/usr/local/share/man/man1/openman.1'
 
 The `:target` key works similarly for most Cask artifacts, such as
 `app`, `binary`, `colorpicker`, `font`, `input_method`, `prefpane`, `qlplugin`,
-`service`, `widget`, `suite`, and `artifact`.
+`service`, `suite`, and `artifact`.
 
 ### :target Should Only Be Used in Select Cases
 
 Don’t use `:target` for aesthetic reasons, like removing version numbers
 (`app "Slack #{version}.app", :target => 'Slack.app'`). With `app`, use it
 when it makes sense functionally and document your reason cleary in the Cask:
-was it [for clarity](../Casks/imagemin.rb); [for consistency](../Casks/devonthink-pro-office.rb);
-[to prevent conflicts](../Casks/flash-player-debugger.rb)? With `binary` you can
+was it [for clarity](https://github.com/caskroom/homebrew-cask/blob/6e4eb6ba58ca0d9e6d42a1d78856cc8a35cf5fce/Casks/imagemin.rb#L11); [for consistency](https://github.com/caskroom/homebrew-cask/blob/6e4eb6ba58ca0d9e6d42a1d78856cc8a35cf5fce/Casks/devonthink-pro-office.rb#L14);
+[to prevent conflicts](https://github.com/caskroom/homebrew-cask/blob/6e4eb6ba58ca0d9e6d42a1d78856cc8a35cf5fce/Casks/flash-player-debugger.rb#L13)? With `binary` you can
 take some extra liberties to be consistent with other command-line tools,
-like [changing case](../Casks/diffmerge.rb) or [removing an extension](../Casks/filebot.rb).
+like [changing case](https://github.com/caskroom/homebrew-cask/blob/6e4eb6ba58ca0d9e6d42a1d78856cc8a35cf5fce/Casks/diffmerge.rb#L11) or [removing an extension](https://github.com/caskroom/homebrew-cask/blob/6e4eb6ba58ca0d9e6d42a1d78856cc8a35cf5fce/Casks/filebot.rb#L12).
 
 
 ## Suite Stanza Details
@@ -553,6 +573,16 @@ installer :script => 'Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer
 
 `depends_on` is used to declare dependencies and requirements for a Cask.
 `depends_on` is not consulted until `install` is attempted.
+
+### Depends_on :cask
+
+The value should be another Cask token, needed by the current Cask.
+
+Example use: [`SSHFS`](https://github.com/caskroom/homebrew-cask/blob/master/Casks/sshfs.rb) depends on OSXFUSE.
+
+```ruby
+depends_on :cask => 'osxfuse'
+```
 
 ### Depends_on :formula
 
@@ -649,7 +679,7 @@ depends_on :arch => :x86_64
 | key        | description |
 | ---------- | ----------- |
 | `:formula` | a Homebrew Formula
-| `:cask`    | *stub - not yet functional*
+| `:cask`    | a Cask token
 | `:macos`   | a symbol, string, array, or comparison expression defining OS X release requirements.
 | `:arch`    | a symbol or array defining hardware requirements.
 | `:x11`     | a Boolean indicating a dependency on X11.
@@ -720,6 +750,7 @@ of the following key/value pairs as arguments to `uninstall`.
   - `:args` - array of arguments to the uninstall script
   - `:input` - array of lines of input to be sent to `stdin` of the script
   - `:must_succeed` - set to `false` if the script is allowed to fail
+  - `:sudo` - set to `false` if the script does not need `sudo`
 * `:delete` (string or array) - single-quoted, absolute paths of files or directory trees to remove.  `:delete` should only be used as a last resort. `:pkgutil` is strongly preferred
 * `:rmdir` (string or array) - single-quoted, absolute paths of directories to remove if empty.
 * `:trash` (string or array) - currently a synonym for `:delete`.  In the future this will cause files to be moved to the Trash.

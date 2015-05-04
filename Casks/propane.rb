@@ -4,8 +4,9 @@ cask :v1 => 'propane' do
 
   url 'https://propaneapp.com/appcast/Propane.zip'
   appcast 'http://propaneapp.com/appcast/release.xml'
+  name 'Propane'
   homepage 'http://propaneapp.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   app 'Propane.app'
 end

@@ -3,8 +3,9 @@ cask :v1 => 'yabumi' do
   sha256 :no_check
 
   url 'https://yabumi.cc/download/Yabumi.dmg'
+  name 'Yabumi'
   homepage 'https://yabumi.cc/'
-  license :unknown    # todo: improve this machine-generated value
+  license :gpl
 
   app 'Yabumi.app'
 end

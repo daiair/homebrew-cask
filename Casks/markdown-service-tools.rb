@@ -3,8 +3,9 @@ cask :v1 => 'markdown-service-tools' do
   sha256 '3a1e3f6950121638e15e6b54ea27f98ae12b08c8c54599cc614635729f539039'
 
   url "http://cdn3.brettterpstra.com/downloads/MarkdownServiceTools#{version}.zip"
+  name 'Markdown Service Tools'
   homepage 'http://brettterpstra.com/projects/markdown-service-tools/'
-  license :unknown    # todo: improve this machine-generated value
+  license :unknown    # todo: change license and remove this comment; ':unknown' is a machine-generated placeholder
 
   service "MarkdownServiceTools#{version}/md - Code - Make Code Block.workflow"
   service "MarkdownServiceTools#{version}/md - Convert - HTML to Clipboard.workflow"
@@ -39,5 +40,4 @@ cask :v1 => 'markdown-service-tools' do
   service "MarkdownServiceTools#{version}/md - Wrap - Angle Brackets.workflow"
   service "MarkdownServiceTools#{version}/md - Wrap - Parenthesis.workflow"
   service "MarkdownServiceTools#{version}/md - Wrap - Square Brackets.workflow"
-
 end

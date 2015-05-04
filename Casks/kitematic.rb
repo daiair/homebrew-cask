@@ -1,10 +1,18 @@
 cask :v1 => 'kitematic' do
-  version '0.4.0'
-  sha256 'bacc15d30c92cd2592dc3b553b830098f7b87fd39c92f5580f20081a7eb499f2'
+  version '0.5.23'
+  sha256 'e644f2f45fd9074f4446a54660a9f7d4a13f07d3349bde0ba3cbd6b587132b71'
 
+  # github.com is the official download host per the vendor homepage
   url "https://github.com/kitematic/kitematic/releases/download/v#{version}/Kitematic-#{version}.zip"
+  appcast 'https://github.com/kitematic/kitematic/releases.atom'
+  name 'Kitematic'
   homepage 'https://kitematic.com/'
-  license :unknown    # todo: improve this machine-generated value
+  license :apache
 
-  app 'Kitematic.app'
+  app 'Kitematic (Beta).app'
+
+  zap :delete => [
+    '~/Library/Application Support/Kitematic',
+    '~/Kitematic'
+  ]
 end
